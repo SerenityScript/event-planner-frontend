@@ -17,7 +17,11 @@ const mockEvents = [
     date: "2025-12-10",
     time: "18:00",
     location: "Hamburg",
-    guests: [/* ... */],
+    guests: [
+      { id: "g1", name: "Anna", contact: "anna@example.com", status: "invited" },
+      { id: "g2", name: "Ben", contact: "ben@example.com", status: "confirmed" },
+      { id: "g3", name: "Cara", contact: "cara@example.com", status: "declined" },
+    ],
     tasks: [/* ... */],
     dishes: [/* ... */],
     shopping: [
@@ -55,33 +59,45 @@ const EventDetailsPage = () => {
   const initialEvent = mockEvents.find((e) => e.id === id) || null;
 
   const [event, setEvent] = useState(initialEvent);
-const [activeTab, setActiveTab] = useState("tasks");
 
-const handleUpdateEvent = (updatedEvent) => {
-  setEvent(updatedEvent);
-};
+  const guestsCount =
+    event?.guests?.filter((guest) => guest.status !== "declined").length || 0;
+  
+  const tasksCount =
+    event?.tasks?.filter((task) => task.done !== true).length || 0;
+  
+  const dishesCount = event?.dishes?.length || 0;
 
-const handleChangeGuests = (newGuests) => {
-  setEvent((prev) =>
-    prev
-      ? {
-          ...prev,
-          guests: newGuests,
-        }
-      : prev
-  );
-};
+  const shoppingCount =
+  event?.shopping?.filter((item) => item.bought !== true).length || 0;
+  
+  const [activeTab, setActiveTab] = useState("tasks");
 
-const handleChangeTasks = (newTasks) => {
-  setEvent((prev) =>
-    prev
-      ? {
-          ...prev,
-          tasks: newTasks,
-        }
-      : prev
-  );
-};
+  const handleUpdateEvent = (updatedEvent) => {
+    setEvent(updatedEvent);
+  };
+
+  const handleChangeGuests = (newGuests) => {
+    setEvent((prev) =>
+      prev
+        ? {
+            ...prev,
+            guests: newGuests,
+          }
+        : prev
+    );
+  };
+
+  const handleChangeTasks = (newTasks) => {
+    setEvent((prev) =>
+      prev
+        ? {
+            ...prev,
+            tasks: newTasks,
+          }
+        : prev
+    );
+  };
 
   const handleChangeDishes = (newDishes) => {
   setEvent((prev) =>
@@ -122,7 +138,14 @@ const handleChangeTasks = (newTasks) => {
           <EditEvent event={event} onUpdate={handleUpdateEvent} />
         }
       >
-        <EventTabs activeTab={activeTab} onTabChange={setActiveTab} />
+        <EventTabs
+          activeTab={activeTab}
+          onTabChange={setActiveTab}
+          guestsCount={guestsCount}
+          tasksCount={tasksCount}
+          dishesCount={dishesCount}
+          shoppingCount={shoppingCount}
+        />
 
         <div style={{ marginTop: "20px" }}>
           {activeTab === "guests" && (
