@@ -96,9 +96,7 @@ export const ShoppingPanel = ({ items, onChangeItems }) => {
               fontSize: "14px",
             }}
           />
-        </div>
 
-        <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
@@ -116,9 +114,9 @@ export const ShoppingPanel = ({ items, onChangeItems }) => {
               </option>
             ))}
           </select>
-
-          <SubmitButton>Hinzufügen</SubmitButton>
         </div>
+
+        <div><SubmitButton>Hinzufügen</SubmitButton></div>
       </form>
 
       {/* Liste der Einkäufe */}

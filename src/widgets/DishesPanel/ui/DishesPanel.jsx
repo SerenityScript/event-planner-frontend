@@ -60,25 +60,25 @@ export const DishesPanel = ({ dishes, onChangeDishes }) => {
           marginBottom: "12px",
         }}
       >
-        <input
-          type="text"
-          placeholder="Gericht (z.B. Caesar Salat)"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          style={{
-            padding: "8px 10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "14px",
-          }}
-        />
-
         <div style={{ display: "flex", gap: "8px" }}>
+          <input
+            type="text"
+            placeholder="Gericht (z.B. Caesar Salat)"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            style={{
+              flex: 1,
+              padding: "8px 10px",
+              borderRadius: "8px",
+              border: "1px solid #ccc",
+              fontSize: "14px",
+            }}
+          />
+
           <select
             value={responsible}
             onChange={(e) => setResponsible(e.target.value)}
             style={{
-              flex: 1,
               padding: "8px 10px",
               borderRadius: "8px",
               border: "1px solid #ccc",
@@ -91,23 +91,24 @@ export const DishesPanel = ({ dishes, onChangeDishes }) => {
               </option>
             ))}
           </select>
+          </div>
 
-          <SubmitButton>Gericht hinzufügen</SubmitButton>
-        </div>
-
-        <textarea
-          placeholder="Notizen (z.B. glutenfrei, vegan...)"
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          rows={2}
-          style={{
-            padding: "8px 10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "14px",
-            resize: "vertical",
-          }}
-        />
+          <textarea
+            placeholder="Notizen (z.B. glutenfrei, vegan...)"
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            rows={2}
+              style={{
+              padding: "8px 10px",
+              borderRadius: "8px",
+              border: "1px solid #ccc",
+              fontSize: "14px",
+              resize: "vertical",
+            }}
+          />
+        
+        <div><SubmitButton>Gericht hinzufügen</SubmitButton></div>
+        
       </form>
 
       {/* Liste der Gerichte */}

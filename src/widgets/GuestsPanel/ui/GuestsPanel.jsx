@@ -10,7 +10,6 @@ const STATUS_OPTIONS = [
 
 export const GuestsPanel = ({ guests, onChangeGuests }) => {
   const [name, setName] = useState("");
-  const [contact, setContact] = useState("");
   const [status, setStatus] = useState("invited");
 
   const handleAddGuest = () => {
@@ -20,14 +19,12 @@ export const GuestsPanel = ({ guests, onChangeGuests }) => {
     const newGuest = {
       id: Date.now().toString() + Math.random().toString(16),
       name: trimmedName,
-      contact: contact.trim(),
       status,
     };
 
     onChangeGuests?.([...(guests || []), newGuest]);
 
     setName("");
-    setContact("");
     setStatus("invited");
   };
 
@@ -81,28 +78,7 @@ export const GuestsPanel = ({ guests, onChangeGuests }) => {
               fontSize: "14px",
             }}
           />
-          <input
-            type="text"
-            placeholder="Kontakt (Telefon / E-Mail)"
-            value={contact}
-            onChange={(e) => setContact(e.target.value)}
-            style={{
-              flex: 1,
-              padding: "8px 10px",
-              borderRadius: "8px",
-              border: "1px solid #ccc",
-              fontSize: "14px",
-            }}
-          />
-        </div>
 
-        <div
-          style={{
-            display: "flex",
-            gap: "8px",
-            alignItems: "center",
-          }}
-        >
           <select
             value={status}
             onChange={(e) => setStatus(e.target.value)}
@@ -119,7 +95,9 @@ export const GuestsPanel = ({ guests, onChangeGuests }) => {
               </option>
             ))}
           </select>
-          
+        </div>
+
+        <div>
           <SubmitButton>Gast hinzufügen</SubmitButton>
         </div>
       </form>

@@ -18,9 +18,9 @@ const mockEvents = [
     time: "18:00",
     location: "Hamburg",
     guests: [
-      { id: "g1", name: "Anna", contact: "anna@example.com", status: "invited" },
-      { id: "g2", name: "Ben", contact: "ben@example.com", status: "confirmed" },
-      { id: "g3", name: "Cara", contact: "cara@example.com", status: "declined" },
+      { id: "g1", name: "Anna", status: "invited" },
+      { id: "g2", name: "Ben", status: "confirmed" },
+      { id: "g3", name: "Cara", status: "declined" },
     ],
     tasks: [/* ... */],
     dishes: [/* ... */],
