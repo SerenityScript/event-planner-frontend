@@ -1,5 +1,6 @@
 // src/widgets/ShoppingPanel/ui/ShoppingPanel.jsx
 import { useState } from "react";
+import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
 
 const CATEGORY_OPTIONS = [
   { value: "food", label: "Lebensmittel" },
@@ -116,22 +117,7 @@ export const ShoppingPanel = ({ items, onChangeItems }) => {
             ))}
           </select>
 
-          <button
-            type="submit"
-            style={{
-              padding: "8px 14px",
-              borderRadius: "8px",
-              border: "none",
-              backgroundColor: "#ff8a00",
-              color: "#fff",
-              cursor: "pointer",
-              fontSize: "14px",
-              fontWeight: 600,
-              whiteSpace: "nowrap",
-            }}
-          >
-            Hinzufügen
-          </button>
+          <SubmitButton>Hinzufügen</SubmitButton>
         </div>
       </form>
 

@@ -1,5 +1,6 @@
 // src/widgets/TasksPanel/ui/TasksPanel.jsx
 import { useState } from "react";
+import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
 
 export const TasksPanel = ({ tasks, onChangeTasks }) => {
   const [newTaskText, setNewTaskText] = useState("");
@@ -66,21 +67,7 @@ export const TasksPanel = ({ tasks, onChangeTasks }) => {
             fontSize: "14px",
           }}
         />
-        <button
-          type="submit"
-          style={{
-            padding: "8px 14px",
-            borderRadius: "8px",
-            border: "none",
-            backgroundColor: "#ff8a00",
-            color: "#fff",
-            cursor: "pointer",
-            fontSize: "14px",
-            fontWeight: 600,
-          }}
-        >
-          Hinzufügen
-        </button>
+        <SubmitButton>Aufgabe hinzufügen</SubmitButton>
       </form>
 
       {/* Liste der Aufgaben */}

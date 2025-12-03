@@ -1,5 +1,6 @@
 // src/widgets/GuestsPanel/ui/GuestsPanel.jsx
 import { useState } from "react";
+import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
 
 const STATUS_OPTIONS = [
   { value: "invited", label: "Eingeladen" },
@@ -118,22 +119,8 @@ export const GuestsPanel = ({ guests, onChangeGuests }) => {
               </option>
             ))}
           </select>
-
-          <button
-            type="submit"
-            style={{
-              padding: "8px 14px",
-              borderRadius: "8px",
-              border: "none",
-              backgroundColor: "#ff8a00",
-              color: "#fff",
-              cursor: "pointer",
-              fontSize: "14px",
-              fontWeight: 600,
-            }}
-          >
-            Gast hinzufügen
-          </button>
+          
+          <SubmitButton>Gast hinzufügen</SubmitButton>
         </div>
       </form>
 

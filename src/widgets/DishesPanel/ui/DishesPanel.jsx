@@ -1,5 +1,6 @@
 // src/widgets/DishesPanel/ui/DishesPanel.jsx
 import { useState } from "react";
+import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
 
 const RESPONSIBLE_OPTIONS = [
   { value: "me", label: "Ich" },
@@ -91,22 +92,7 @@ export const DishesPanel = ({ dishes, onChangeDishes }) => {
             ))}
           </select>
 
-          <button
-            type="submit"
-            style={{
-              padding: "8px 14px",
-              borderRadius: "8px",
-              border: "none",
-              backgroundColor: "#ff8a00",
-              color: "#fff",
-              cursor: "pointer",
-              fontSize: "14px",
-              fontWeight: 600,
-              whiteSpace: "nowrap",
-            }}
-          >
-            Gericht hinzufügen
-          </button>
+          <SubmitButton>Gericht hinzufügen</SubmitButton>
         </div>
 
         <textarea
