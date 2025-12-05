@@ -1,12 +1,9 @@
 // src/widgets/GuestsPanel/ui/GuestsPanel.jsx
 import { useState } from "react";
 import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
+import { statusOptions } from "../lib/statusOptions";
+import { DeleteButton } from "@/shared/ui/DeleteButton/DeleteButton";
 
-const STATUS_OPTIONS = [
-  { value: "invited", label: "Eingeladen" },
-  { value: "confirmed", label: "Bestätigt" },
-  { value: "declined", label: "Sagt ab" },
-];
 
 export const GuestsPanel = ({ guests, onChangeGuests }) => {
   const [name, setName] = useState("");
@@ -89,7 +86,7 @@ export const GuestsPanel = ({ guests, onChangeGuests }) => {
               fontSize: "14px",
             }}
           >
-            {STATUS_OPTIONS.map((opt) => (
+            {statusOptions.map((opt) => (
               <option value={opt.value} key={opt.value}>
                 {opt.label}
               </option>
@@ -159,7 +156,7 @@ export const GuestsPanel = ({ guests, onChangeGuests }) => {
                   fontSize: "13px",
                 }}
               >
-                {STATUS_OPTIONS.map((opt) => (
+                {statusOptions.map((opt) => (
                   <option value={opt.value} key={opt.value}>
                     {opt.label}
                   </option>
@@ -167,19 +164,7 @@ export const GuestsPanel = ({ guests, onChangeGuests }) => {
               </select>
             </div>
 
-            <button
-              type="button"
-              onClick={() => handleDeleteGuest(guest.id)}
-              style={{
-                border: "none",
-                background: "transparent",
-                color: "#d11",
-                cursor: "pointer",
-                fontSize: "14px",
-              }}
-            >
-              Entfernen
-            </button>
+            <DeleteButton onClick={() => handleDeleteGuest(guest.id)} />
           </div>
         ))}
       </div>

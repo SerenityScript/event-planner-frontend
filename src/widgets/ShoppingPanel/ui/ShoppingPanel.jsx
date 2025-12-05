@@ -1,13 +1,9 @@
 // src/widgets/ShoppingPanel/ui/ShoppingPanel.jsx
 import { useState } from "react";
 import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
+import { categoryOptions } from "../lib/categoryOptions";
+import { DeleteButton } from "@/shared/ui/DeleteButton/DeleteButton";
 
-const CATEGORY_OPTIONS = [
-  { value: "food", label: "Lebensmittel" },
-  { value: "drinks", label: "Getränke" },
-  { value: "decor", label: "Deko" },
-  { value: "other", label: "Sonstiges" },
-];
 
 export const ShoppingPanel = ({ items, onChangeItems }) => {
   const [name, setName] = useState("");
@@ -108,7 +104,7 @@ export const ShoppingPanel = ({ items, onChangeItems }) => {
               fontSize: "14px",
             }}
           >
-            {CATEGORY_OPTIONS.map((opt) => (
+            {categoryOptions.map((opt) => (
               <option value={opt.value} key={opt.value}>
                 {opt.label}
               </option>
@@ -183,19 +179,7 @@ export const ShoppingPanel = ({ items, onChangeItems }) => {
               {item.category === "other" && "Sonstiges"}
             </div>
 
-            <button
-              type="button"
-              onClick={() => handleDeleteItem(item.id)}
-              style={{
-                border: "none",
-                background: "transparent",
-                color: "#d11",
-                cursor: "pointer",
-                fontSize: "13px",
-              }}
-            >
-              Entfernen
-            </button>
+            <DeleteButton onClick={() => handleDeleteItem(item.id)} />
           </div>
         ))}
       </div>

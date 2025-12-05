@@ -1,12 +1,9 @@
 // src/widgets/DishesPanel/ui/DishesPanel.jsx
 import { useState } from "react";
 import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
+import { responsibleOptions } from "../lib/responsibleOptions";
+import { DeleteButton } from "@/shared/ui/DeleteButton/DeleteButton";
 
-const RESPONSIBLE_OPTIONS = [
-  { value: "me", label: "Ich" },
-  { value: "guest", label: "Gast" },
-  { value: "delivery", label: "Lieferung" },
-];
 
 export const DishesPanel = ({ dishes, onChangeDishes }) => {
   const [name, setName] = useState("");
@@ -85,7 +82,7 @@ export const DishesPanel = ({ dishes, onChangeDishes }) => {
               fontSize: "14px",
             }}
           >
-            {RESPONSIBLE_OPTIONS.map((opt) => (
+            {responsibleOptions.map((opt) => (
               <option value={opt.value} key={opt.value}>
                 {opt.label}
               </option>
@@ -181,19 +178,7 @@ export const DishesPanel = ({ dishes, onChangeDishes }) => {
                 justifyContent: "flex-end",
               }}
             >
-              <button
-                type="button"
-                onClick={() => handleDeleteDish(dish.id)}
-                style={{
-                  border: "none",
-                  background: "transparent",
-                  color: "#d11",
-                  cursor: "pointer",
-                  fontSize: "13px",
-                }}
-              >
-                Entfernen
-              </button>
+              <DeleteButton onClick={() => handleDeleteDish(dish.id)} />
             </div>
           </div>
         ))}

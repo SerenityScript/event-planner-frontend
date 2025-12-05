@@ -1,6 +1,7 @@
 // src/widgets/TasksPanel/ui/TasksPanel.jsx
 import { useState } from "react";
 import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
+import { DeleteButton } from "@/shared/ui/DeleteButton/DeleteButton";
 
 export const TasksPanel = ({ tasks, onChangeTasks }) => {
   const [newTaskText, setNewTaskText] = useState("");
@@ -108,19 +109,7 @@ export const TasksPanel = ({ tasks, onChangeTasks }) => {
               {task.text}
             </span>
 
-            <button
-              type="button"
-              onClick={() => handleDeleteTask(task.id)}
-              style={{
-                border: "none",
-                background: "transparent",
-                color: "#d11",
-                cursor: "pointer",
-                fontSize: "14px",
-              }}
-            >
-              Entfernen
-            </button>
+            <DeleteButton onClick={() => handleDeleteTask(task.id)} />
           </div>
         ))}
       </div>
