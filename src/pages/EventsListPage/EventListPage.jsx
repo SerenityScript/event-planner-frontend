@@ -1,5 +1,5 @@
-import { EventCard } from "@/entities/EventCard/ui/EventCard";
 import { AddNewEvent } from "@/features/AddNewEvent/ui/AddNewEvent";
+import { EventCard } from "@/entities/Event/ui/EventCard/EventCard";
 
 const mockEvents = [
   { id: "1", title: "День рождения мамы", date: "2025-12-10" },

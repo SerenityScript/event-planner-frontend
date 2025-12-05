@@ -1,40 +1,9 @@
 // src/widgets/GuestsPanel/ui/GuestsPanel.jsx
-import { useState } from "react";
-import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
 import { statusOptions } from "../lib/statusOptions";
-import { DeleteButton } from "@/shared/ui/DeleteButton/DeleteButton";
-
+import { DeleteGuest } from "@/features/DeleteGuest/ui/DeleteGuest";
+import { AddGuest } from "@/features/AddGuest/ui/AddGuest";
 
 export const GuestsPanel = ({ guests, onChangeGuests }) => {
-  const [name, setName] = useState("");
-  const [status, setStatus] = useState("invited");
-
-  const handleAddGuest = () => {
-    const trimmedName = name.trim();
-    if (!trimmedName) return;
-
-    const newGuest = {
-      id: Date.now().toString() + Math.random().toString(16),
-      name: trimmedName,
-      status,
-    };
-
-    onChangeGuests?.([...(guests || []), newGuest]);
-
-    setName("");
-    setStatus("invited");
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleAddGuest();
-  };
-
-  const handleDeleteGuest = (id) => {
-    const updated = (guests || []).filter((guest) => guest.id !== id);
-    onChangeGuests?.(updated);
-  };
-
   const handleChangeStatus = (id, newStatus) => {
     const updated = (guests || []).map((guest) =>
       guest.id === id ? { ...guest, status: newStatus } : guest
@@ -51,53 +20,8 @@ export const GuestsPanel = ({ guests, onChangeGuests }) => {
         border: "1px solid #eee",
       }}
     >
-      {/* Formular zum Hinzufügen */}
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "8px",
-          marginBottom: "12px",
-        }}
-      >
-        <div style={{ display: "flex", gap: "8px" }}>
-          <input
-            type="text"
-            placeholder="Name des Gastes"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            style={{
-              flex: 1,
-              padding: "8px 10px",
-              borderRadius: "8px",
-              border: "1px solid #ccc",
-              fontSize: "14px",
-            }}
-          />
-
-          <select
-            value={status}
-            onChange={(e) => setStatus(e.target.value)}
-            style={{
-              padding: "8px 10px",
-              borderRadius: "8px",
-              border: "1px solid #ccc",
-              fontSize: "14px",
-            }}
-          >
-            {statusOptions.map((opt) => (
-              <option value={opt.value} key={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <SubmitButton>Gast hinzufügen</SubmitButton>
-        </div>
-      </form>
+      {/* Feature: AddGuest */}
+      <AddGuest guests={guests} onChangeGuests={onChangeGuests} />
 
       {/* Liste der Gäste */}
       <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
@@ -164,7 +88,11 @@ export const GuestsPanel = ({ guests, onChangeGuests }) => {
               </select>
             </div>
 
-            <DeleteButton onClick={() => handleDeleteGuest(guest.id)} />
+            <DeleteGuest
+              guestId={guest.id}
+              guests={guests}
+              onChangeGuests={onChangeGuests}
+            />
           </div>
         ))}
       </div>

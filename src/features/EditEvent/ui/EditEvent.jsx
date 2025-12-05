@@ -1,7 +1,7 @@
 // src/features/event/edit-event/ui/EditEvent.jsx
 import { useState } from "react";
 import { Modal } from "@/shared/ui/Modal/Modal";
-import { EventForm } from "@/entities/EventForm/ui/EventForm";
+import { EventForm } from "@/entities/Event/ui/EventForm/EventForm";
 
 export const EditEvent = ({ event, onUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
