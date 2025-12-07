@@ -24,8 +24,13 @@ export const TaskForm = ({
       onSubmit={handleSubmit}
       style={{
         display: "flex",
+        flexDirection: "column",
         gap: "8px",
-        marginBottom: "12px",
+        marginBottom: "16px",
+        padding: "8px 10px",
+        borderRadius: "10px",
+        backgroundColor: "#fff",
+        border: "1px solid #eee",
       }}
     >
       <input
@@ -42,9 +47,11 @@ export const TaskForm = ({
         }}
       />
 
-      <SubmitButton disabled={!text.trim()}>
-        {submitLabel}
-      </SubmitButton>
+      <div>
+        <SubmitButton disabled={!text.trim()}>
+          {submitLabel}
+        </SubmitButton>
+      </div>
     </form>
   );
 };
