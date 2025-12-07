@@ -24,6 +24,7 @@ export const EditTask = ({ task, tasks = [], onChangeTasks }) => {
       <EditButton onClick={handleOpen} />
 
       <Modal isOpen={isOpen} onClose={handleClose}>
+        <div style={{ minWidth: "320px" }}>
         <h3
           style={{
             marginTop: 0,
@@ -38,7 +39,8 @@ export const EditTask = ({ task, tasks = [], onChangeTasks }) => {
           initialValues={{ text: task.text }}
           submitLabel="Speichern"
           onSubmit={handleSubmit}
-        />
+          />
+          </div>
       </Modal>
     </>
   );
