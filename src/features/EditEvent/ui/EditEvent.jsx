@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Modal } from "@/shared/ui/Modal/Modal";
 import { EventForm } from "@/entities/Event/ui/EventForm/EventForm";
+import { EditButton } from "../../../shared/ui/EditButton/EditButton";
 
 export const EditEvent = ({ event, onUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,21 +31,8 @@ export const EditEvent = ({ event, onUpdate }) => {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={handleOpen}
-        style={{
-          padding: "6px 12px",
-          borderRadius: "8px",
-          border: "1px solid #ccc",
-          backgroundColor: "#f7f7f7",
-          cursor: "pointer",
-          fontSize: "14px",
-        }}
-      >
-        Edit Event
-      </button>
-
+      <EditButton onClick={handleOpen} />
+      
       <Modal isOpen={isOpen} onClose={handleClose}>
         <EventForm
           initialValues={{
