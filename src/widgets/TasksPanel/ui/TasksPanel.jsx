@@ -1,40 +1,14 @@
-// src/widgets/TasksPanel/ui/TasksPanel.jsx
-import { useState } from "react";
-import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
-import { DeleteButton } from "@/shared/ui/DeleteButton/DeleteButton";
+import { AddTask } from "@/features/AddTask/ui/AddTask";
+import { EditTask } from "@/features/EditTask/ui/EditTask";
+import { DeleteTask } from "@/features/DeleteTask/ui/DeleteTask";
+import { AddedTask } from "@/entities/Task/ui/AddedTask/AddedTask";
 
-export const TasksPanel = ({ tasks, onChangeTasks }) => {
-  const [newTaskText, setNewTaskText] = useState("");
-
-  const handleAddTask = () => {
-    const text = newTaskText.trim();
-    if (!text) return;
-
-    const newTask = {
-      id: Date.now().toString() + Math.random().toString(16),
-      text,
-      done: false,
-    };
-
-    onChangeTasks?.([...(tasks || []), newTask]);
-    setNewTaskText("");
-  };
-
+export const TasksPanel = ({ tasks = [], onChangeTasks }) => {
   const handleToggleTask = (id) => {
-    const updated = (tasks || []).map((task) =>
+    const updated = tasks.map((task) =>
       task.id === id ? { ...task, done: !task.done } : task
     );
     onChangeTasks?.(updated);
-  };
-
-  const handleDeleteTask = (id) => {
-    const updated = (tasks || []).filter((task) => task.id !== id);
-    onChangeTasks?.(updated);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleAddTask();
   };
 
   return (
@@ -46,71 +20,38 @@ export const TasksPanel = ({ tasks, onChangeTasks }) => {
         border: "1px solid #eee",
       }}
     >
-      {/* Form zum Hinzufügen */}
-      <form
-        onSubmit={handleSubmit}
-        style={{
-          display: "flex",
-          gap: "8px",
-          marginBottom: "12px",
-        }}
-      >
-        <input
-          type="text"
-          placeholder="Neue Aufgabe hinzufügen..."
-          value={newTaskText}
-          onChange={(e) => setNewTaskText(e.target.value)}
-          style={{
-            flex: 1,
-            padding: "8px 10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "14px",
-          }}
-        />
-        <SubmitButton>Aufgabe hinzufügen</SubmitButton>
-      </form>
+      {/* Feature: AddTask */}
+      <AddTask tasks={tasks} onChangeTasks={onChangeTasks} />
 
       {/* Liste der Aufgaben */}
       <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-        {(tasks || []).length === 0 && (
+        {tasks.length === 0 && (
           <p style={{ fontSize: "14px", color: "#777", margin: 0 }}>
             Noch keine Aufgaben. Füge die erste Aufgabe hinzu ✨
           </p>
         )}
 
-        {(tasks || []).map((task) => (
-          <div
+        {tasks.map((task) => (
+          <AddedTask
             key={task.id}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "8px 10px",
-              borderRadius: "8px",
-              backgroundColor: "#fff",
-              border: "1px solid #eee",
-            }}
-          >
-            <input
-              type="checkbox"
-              checked={task.done}
-              onChange={() => handleToggleTask(task.id)}
-            />
-
-            <span
-              style={{
-                flex: 1,
-                fontSize: "14px",
-                textDecoration: task.done ? "line-through" : "none",
-                color: task.done ? "#999" : "#333",
-              }}
-            >
-              {task.text}
-            </span>
-
-            <DeleteButton onClick={() => handleDeleteTask(task.id)} />
-          </div>
+            task={task}
+            onToggle={() => handleToggleTask(task.id)}
+            onDelete={undefined} // не используем, т.к. выносим в feature
+            extraActions={
+              <>
+                <EditTask
+                  task={task}
+                  tasks={tasks}
+                  onChangeTasks={onChangeTasks}
+                />
+                <DeleteTask
+                  taskId={task.id}
+                  tasks={tasks}
+                  onChangeTasks={onChangeTasks}
+                />
+              </>
+            }
+          />
         ))}
       </div>
     </div>
