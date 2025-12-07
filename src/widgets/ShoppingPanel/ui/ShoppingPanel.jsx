@@ -79,19 +79,7 @@ export const ShoppingPanel = ({ items, onChangeItems }) => {
               fontSize: "14px",
             }}
           />
-          <input
-            type="text"
-            placeholder="Menge (z.B. 3 L)"
-            value={qty}
-            onChange={(e) => setQty(e.target.value)}
-            style={{
-              flex: 1,
-              padding: "8px 10px",
-              borderRadius: "8px",
-              border: "1px solid #ccc",
-              fontSize: "14px",
-            }}
-          />
+          
 
           <select
             value={category}
@@ -111,6 +99,20 @@ export const ShoppingPanel = ({ items, onChangeItems }) => {
             ))}
           </select>
         </div>
+        
+        <input
+            type="text"
+            placeholder="Menge (z.B. 3 L)"
+            value={qty}
+            onChange={(e) => setQty(e.target.value)}
+            style={{
+              flex: 1,
+              padding: "8px 10px",
+              borderRadius: "8px",
+              border: "1px solid #ccc",
+              fontSize: "14px",
+            }}
+          />
 
         <div><SubmitButton>Hinzufügen</SubmitButton></div>
       </form>
