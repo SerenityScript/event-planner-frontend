@@ -1,14 +1,15 @@
 import { useState } from "react";
+import { Modal } from "@/shared/ui/Modal/Modal";
 import { GuestForm } from "@/entities/Guest/ui/GuestForm/GuestForm";
-import { EditButton } from "../../../shared/ui/EditButton/EditButton";
+import { EditButton } from "@/shared/ui/EditButton/EditButton";
 
 export const EditGuest = ({ guest, guests = [], onChangeGuests }) => {
-  const [isEditing, setIsEditing] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   if (!guest) return null;
 
-  const handleOpen = () => setIsEditing(true);
-  const handleClose = () => setIsEditing(false);
+  const handleOpen = () => setIsOpen(true);
+  const handleClose = () => setIsOpen(false);
 
   const handleSubmit = (formValues) => {
     const updatedGuests = guests.map((g) =>
@@ -20,20 +21,21 @@ export const EditGuest = ({ guest, guests = [], onChangeGuests }) => {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "4px" }}>
-      {!isEditing && (
-        <EditButton onClick={handleOpen} />
-      )}
+    <>
+      <EditButton onClick={handleOpen} />
 
-      {isEditing && (
-        <div
-          style={{
-            marginTop: "4px",
-            borderRadius: "8px",
-            border: "1px solid #eee",
-            backgroundColor: "#fafafa",
-          }}
-        >
+      <Modal isOpen={isOpen} onClose={handleClose}>
+        <div style={{ minWidth: "320px" }}>
+          <h3
+            style={{
+              marginTop: 0,
+              marginBottom: "12px",
+              fontSize: "18px",
+            }}
+          >
+            Gast bearbeiten
+          </h3>
+
           <GuestForm
             initialValues={{
               name: guest.name,
@@ -42,24 +44,8 @@ export const EditGuest = ({ guest, guests = [], onChangeGuests }) => {
             submitLabel="Speichern"
             onSubmit={handleSubmit}
           />
-
-          <button
-            type="button"
-            onClick={handleClose}
-            style={{
-              border: "none",
-              background: "transparent",
-              color: "#777",
-              cursor: "pointer",
-              fontSize: "12px",
-              marginLeft: "10px",
-              marginBottom: "8px",
-            }}
-          >
-            Abbrechen
-          </button>
         </div>
-      )}
-    </div>
+      </Modal>
+    </>
   );
 };
