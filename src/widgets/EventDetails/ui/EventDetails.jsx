@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { EventTabs } from "@/widgets/EventTabs/ui/EventTabs";
 import { EventLayout } from "@/widgets/EventLayout/ui/EventLayout";
-import { EditEvent } from "@/features/EditEvent/ui/EditEvent";
+import { EditEvent } from "@/features/EditEvent";
 import { TasksPanel } from "@/widgets/TasksPanel/ui/TasksPanel";
 import { GuestsPanel } from "@/widgets/GuestsPanel/ui/GuestsPanel";
 import { DishesPanel } from "@/widgets/DishesPanel/ui/DishesPanel";

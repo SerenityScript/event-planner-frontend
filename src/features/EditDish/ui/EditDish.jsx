@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Modal } from "@/shared/ui/Modal/Modal";
-import { DishForm } from "@/entities/Dish/ui/DishForm/DishForm";
-import { EditButton } from "@/shared/ui/EditButton/EditButton";
+import { Modal } from "@/shared/ui";
+import { DishForm } from "@/entities/Dish";
+import { EditButton } from "@/shared/ui";
 
 export const EditDish = ({ dish, dishes = [], onChangeDishes, responsibleOptions }) => {
   const [isOpen, setIsOpen] = useState(false);

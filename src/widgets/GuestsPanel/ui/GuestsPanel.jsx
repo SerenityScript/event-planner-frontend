@@ -1,9 +1,9 @@
 // src/widgets/GuestsPanel/ui/GuestsPanel.jsx
 import { statusOptions } from "../lib/statusOptions";
-import { DeleteGuest } from "@/features/DeleteGuest/ui/DeleteGuest";
-import { AddGuest } from "@/features/AddGuest/ui/AddGuest";
-import { EditGuest } from "@/features/EditGuest/ui/EditGuest";
-import { AddedGuest } from "@/entities/Guest/ui/AddedGuest/AddedGuest";
+import { DeleteGuest } from "@/features/DeleteGuest";
+import { AddGuest } from "@/features/AddGuest";
+import { EditGuest } from "@/features/EditGuest";
+import { AddedGuest } from "@/entities/Guest";
 
 export const GuestsPanel = ({ guests, onChangeGuests }) => {
   const handleChangeStatus = (id, newStatus) => {

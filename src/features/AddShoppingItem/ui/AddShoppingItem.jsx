@@ -1,4 +1,4 @@
-import { ShoppingForm } from "@/entities/Shopping/ui/ShoppingForm/ShoppingForm";
+import { ShoppingForm } from "@/entities/Shopping";
 
 export const AddShoppingItem = ({
   items = [],

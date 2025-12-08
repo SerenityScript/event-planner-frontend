@@ -1,4 +1,4 @@
-import { GuestForm } from "@/entities/Guest/ui/GuestForm/GuestForm";
+import { GuestForm } from "@/entities/Guest";
 
 export const AddGuest = ({ guests = [], onChangeGuests }) => {
   const handleSubmit = (formValues) => {

@@ -1,4 +1,4 @@
-import { TaskForm } from "@/entities/Task/ui/TaskForm/TaskForm";
+import { TaskForm } from "@/entities/Task";
 
 export const AddTask = ({ tasks = [], onChangeTasks }) => {
   const handleSubmit = ({ text }) => {

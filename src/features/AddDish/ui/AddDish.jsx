@@ -1,4 +1,4 @@
-import { DishForm } from "@/entities/Dish/ui/DishForm/DishForm";
+import { DishForm } from "@/entities/Dish";
 
 export const AddDish = ({ dishes = [], onChangeDishes, responsibleOptions }) => {
   const handleSubmit = (formValues) => {

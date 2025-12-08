@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { Modal } from "@/shared/ui/Modal/Modal";
-import { EventForm } from "@/entities/Event/ui/EventForm/EventForm";
+import { Modal } from "@/shared/ui";
+import { EventForm } from "@/entities/Event";
 
 export const AddNewEvent = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,7 +1,7 @@
-import { AddTask } from "@/features/AddTask/ui/AddTask";
-import { EditTask } from "@/features/EditTask/ui/EditTask";
-import { DeleteTask } from "@/features/DeleteTask/ui/DeleteTask";
-import { AddedTask } from "@/entities/Task/ui/AddedTask/AddedTask";
+import { AddTask } from "@/features/AddTask";
+import { EditTask } from "@/features/EditTask";
+import { DeleteTask } from "@/features/DeleteTask";
+import { AddedTask } from "@/entities/Task";
 
 export const TasksPanel = ({ tasks = [], onChangeTasks }) => {
   const handleToggleTask = (id) => {
@@ -20,7 +20,7 @@ export const TasksPanel = ({ tasks = [], onChangeTasks }) => {
         border: "1px solid #eee",
       }}
     >
-      {/* Feature: AddTask */}
+      
       <AddTask tasks={tasks} onChangeTasks={onChangeTasks} />
 
       {/* Liste der Aufgaben */}

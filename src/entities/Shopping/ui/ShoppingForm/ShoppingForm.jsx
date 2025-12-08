@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
+import { SubmitButton } from "@/shared/ui";
 
 export const ShoppingForm = ({
   initialValues = { name: "", qty: "", category: "food" },

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Modal } from "@/shared/ui/Modal/Modal";
-import { GuestForm } from "@/entities/Guest/ui/GuestForm/GuestForm";
-import { EditButton } from "@/shared/ui/EditButton/EditButton";
+import { Modal } from "@/shared/ui";
+import { GuestForm } from "@/entities/Guest";
+import { EditButton } from "@/shared/ui";
 
 export const EditGuest = ({ guest, guests = [], onChangeGuests }) => {
   const [isOpen, setIsOpen] = useState(false);

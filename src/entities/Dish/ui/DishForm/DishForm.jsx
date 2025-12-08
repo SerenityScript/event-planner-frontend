@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SubmitButton } from "@/shared/ui/SubmitButton/SubmitButton";
+import { SubmitButton } from "@/shared/ui";
 
 export const DishForm = ({
   initialValues = { name: "", responsible: "me", note: "" },
@@ -91,7 +91,7 @@ export const DishForm = ({
       />
 
       <div>
-        <SubmitButton /* disabled={!name.trim()} */>
+        <SubmitButton disabled={!name.trim()}>
           {submitLabel}
         </SubmitButton>
       </div>

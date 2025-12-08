@@ -1,9 +1,4 @@
-const TABS = [
-  { id: "guests", label: "Gäste" },
-  { id: "tasks", label: "Aufgaben" },
-  { id: "dishes", label: "Gerichte" },
-  { id: "shopping", label: "Einkäufe" },
-];
+import { tabs } from "../lib/tabs";
 
 export const EventTabs = ({
   activeTab,
@@ -22,7 +17,7 @@ export const EventTabs = ({
         marginBottom: "16px",
       }}
     >
-      {TABS.map((tab) => {
+      {tabs.map((tab) => {
         const isActive = tab.id === activeTab;
 
         // 👇 Логика отображения лейбла

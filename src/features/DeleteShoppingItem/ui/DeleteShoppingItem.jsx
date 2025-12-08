@@ -1,4 +1,4 @@
-import { DeleteButton } from "@/shared/ui/DeleteButton/DeleteButton";
+import { DeleteButton } from "@/shared/ui";
 
 export const DeleteShoppingItem = ({ itemId, items = [], onChangeItems }) => {
   const handleDelete = () => {

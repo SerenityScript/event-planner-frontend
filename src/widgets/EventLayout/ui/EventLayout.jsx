@@ -1,5 +1,3 @@
-// src/widgets/EventLayout/ui/EventLayout.jsx
-
 export const EventLayout = ({ event, children, rightActions }) => {
   if (!event) return null;
 

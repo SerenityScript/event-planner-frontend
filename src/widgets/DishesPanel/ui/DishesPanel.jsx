@@ -1,8 +1,8 @@
 import { responsibleOptions } from "../lib/responsibleOptions";
-import { AddDish } from "@/features/AddDish/ui/AddDish";
-import { EditDish } from "@/features/EditDish/ui/EditDish";
-import { DeleteDish } from "@/features/DeleteDish/ui/DeleteDish";
-import { AddedDish } from "@/entities/Dish/ui/AddedDish/AddedDish";
+import { AddDish } from "@/features/AddDish";
+import { EditDish } from "@/features/EditDish";
+import { DeleteDish } from "@/features/DeleteDish";
+import { AddedDish } from "@/entities/Dish";
 
 export const DishesPanel = ({ dishes = [], onChangeDishes }) => {
   return (

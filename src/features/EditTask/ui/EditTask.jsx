@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Modal } from "@/shared/ui/Modal/Modal";
-import { TaskForm } from "@/entities/Task/ui/TaskForm/TaskForm";
-import { EditButton } from "@/shared/ui/EditButton/EditButton";
+import { Modal } from "@/shared/ui";
+import { TaskForm } from "@/entities/Task";
+import { EditButton } from "@/shared/ui";
 
 export const EditTask = ({ task, tasks = [], onChangeTasks }) => {
   const [isOpen, setIsOpen] = useState(false);

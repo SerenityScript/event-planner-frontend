@@ -1,4 +1,4 @@
-import { DeleteButton } from "@/shared/ui/DeleteButton/DeleteButton";
+import { DeleteButton } from "@/shared/ui";
 
 export const DeleteDish = ({ dishId, dishes = [], onChangeDishes }) => {
   const handleDelete = () => {

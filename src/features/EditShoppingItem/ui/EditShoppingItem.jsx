@@ -1,8 +1,7 @@
-// src/features/EditShoppingItem/ui/EditShoppingItem.jsx
 import { useState } from "react";
-import { Modal } from "@/shared/ui/Modal/Modal";
-import { ShoppingForm } from "@/entities/Shopping/ui/ShoppingForm/ShoppingForm";
-import { EditButton } from "@/shared/ui/EditButton/EditButton";
+import { Modal } from "@/shared/ui";
+import { ShoppingForm } from "@/entities/Shopping";
+import { EditButton } from "@/shared/ui";
 
 export const EditShoppingItem = ({
   item,

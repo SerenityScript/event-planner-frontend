@@ -1,8 +1,8 @@
 import { categoryOptions } from "../lib/categoryOptions";
-import { AddShoppingItem } from "@/features/AddShoppingItem/ui/AddShoppingItem";
-import { EditShoppingItem } from "@/features/EditShoppingItem/ui/EditShoppingItem";
-import { DeleteShoppingItem } from "@/features/DeleteShoppingItem/ui/DeleteShoppingItem";
-import { AddedShoppingItem } from "@/entities/Shopping/ui/AddedShoppingItem/AddedShoppingItem";
+import { AddShoppingItem } from "@/features/AddShoppingItem";
+import { EditShoppingItem } from "@/features/EditShoppingItem";
+import { DeleteShoppingItem } from "@/features/DeleteShoppingItem";
+import { AddedShoppingItem } from "@/entities/Shopping";
 
 export const ShoppingPanel = ({ items = [], onChangeItems }) => {
   const handleToggleBought = (id) => {
