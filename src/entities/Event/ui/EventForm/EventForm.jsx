@@ -1,43 +1,28 @@
 import { useEffect, useState } from "react";
-import { fromISODate, toISODate, isValidTime } from "@/shared/utils";
+import { toISODate, isValidTime } from "@/shared/utils";
+import { mapFormToPayload, mapInitialToForm, validateEventForm } from "@/entities/Event/lib";
+
 
 export const EventForm = ({
-  initialValues = {
-    name: "",
-    date: "", // в UI: DD.MM.YYYY
-    time: "", // HH:mm
-    location: "",
-  },
+  initialValues = { name: "", date: "", time: "", location: "" },
   onSubmit,
+  onBack,
   submitLabel = "Save Changes",
   isSubmitting = false,
 }) => {
-  const [form, setForm] = useState(() => ({
-    name: initialValues?.name ?? "",
-    date: fromISODate(initialValues?.date ?? ""), // если пришло ISO — покажем DE
-    time: initialValues?.time ?? "",
-    location: initialValues?.location ?? "",
-  }));
-
+  const [form, setForm] = useState(() => mapInitialToForm(initialValues));
   const [errors, setErrors] = useState({ date: "", time: "" });
 
-  // если initialValues меняются (например, при загрузке события) — синхронизируем форму
   useEffect(() => {
-    setForm({
-      name: initialValues?.name ?? "",
-      date: fromISODate(initialValues?.date ?? ""),
-      time: initialValues?.time ?? "",
-      location: initialValues?.location ?? "",
-    });
-    setErrors({ date: "", time: "" });
-  }, [initialValues]);
+  setForm(mapInitialToForm(initialValues));
+  setErrors({ date: "", time: "" });
+}, [initialValues?.name, initialValues?.date, initialValues?.time, initialValues?.location]);
 
   const handleChange = (field) => (e) => {
     const value = e.target.value;
 
     setForm((prev) => ({ ...prev, [field]: value }));
 
-    // лёгкая live-валидация
     if (field === "date") {
       const iso = toISODate(value);
       setErrors((prev) => ({
@@ -57,33 +42,25 @@ export const EventForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const isoDate = toISODate(form.date);
-    const okTime = isValidTime(form.time);
-
-    const nextErrors = {
-      date: isoDate ? "" : "Use format DD.MM.YYYY (e.g. 02.04.2026)",
-      time: okTime ? "" : "Use format HH:mm (e.g. 15:00)",
-    };
+    const nextErrors = validateEventForm(form);
     setErrors(nextErrors);
 
     const hasErrors = Boolean(nextErrors.date || nextErrors.time);
     if (hasErrors) return;
 
-    // отправляем на backend в согласованном формате
-    const payload = {
-      name: form.name.trim(),
-      date: isoDate, // "YYYY-MM-DD"
-      time: form.time.trim(), // "HH:mm"
-      location: form.location.trim(),
-    };
-
+    const payload = mapFormToPayload(form);
     onSubmit?.(payload);
   };
 
   return (
     <div className="event-form">
       <header className="event-form__header">
-        <button type="button" className="event-form__back-button" aria-label="Back">
+        <button
+          type="button"
+          className="event-form__back-button"
+          aria-label="Back"
+          onClick={onBack}
+        >
           ←
         </button>
         <h1 className="event-form__title">Event Details</h1>
