@@ -1,21 +1,32 @@
 import { useState } from "react";
 import { Modal } from "@/shared/ui";
 import { EventForm } from "@/entities/Event";
+import { createEvent } from "@/shared/api";
 
-export const AddNewEvent = () => {
+export const AddNewEvent = ({ onCreated }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    if (!isSubmitting) setIsOpen(false)
+  };
 
-  const handleSubmit = (data) => {
-    // сюда потом придёт запрос на backend (POST /api/events)
-    console.log("Create new event:", data);
+  const handleSubmit = async (data) => {
+    try {
+      setIsSubmitting(true);
 
-    // после успешного сохранения можно:
-    // 1) обновить список событий (через пропсы/контекст/запрос)
-    // 2) закрыть модалку
-    handleClose();
+      const result = await createEvent(data);
+
+      onCreated?.(result?.event);
+
+      setIsOpen(false);
+    } catch (e) {
+      console.error(e);
+      alert(e?.message || "Failed to create event");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -26,14 +37,11 @@ export const AddNewEvent = () => {
 
       <Modal isOpen={isOpen} onClose={handleClose}>
         <EventForm
-          initialValues={{
-            name: "",
-            date: "",
-            time: "",
-            location: "",
-          }}
+          initialValues={{ name: "", date: "", time: "", location: "" }}
           submitLabel="Create Event"
+          isSubmitting={isSubmitting}
           onSubmit={handleSubmit}
+          onBack={handleClose}
         />
       </Modal>
     </>
