@@ -1,26 +1,20 @@
-const request = async (url, options) => {
-  const res = await fetch(url, options);
-  const data = await res.json().catch(() => null);
-
-  if (!res.ok) {
-    throw new Error(data?.error || data?.message || "Request failed");
-  }
-  return data;
-};
+import { request, JSON_HEADERS } from "./base";
 
 export const getEvents = () => request("/api/events");
+
+export const getEventById = (id) => request(`/api/events/${id}`);
 
 export const createEvent = (payload) =>
   request("/api/events", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: JSON_HEADERS,
     body: JSON.stringify(payload),
   });
 
 export const updateEvent = (id, payload) =>
   request(`/api/events/${id}`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    headers: JSON_HEADERS,
     body: JSON.stringify(payload),
   });
 
