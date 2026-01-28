@@ -11,7 +11,6 @@ export const EventLayout = ({ event, children, rightActions }) => {
         marginBottom: "20px",
       }}
     >
-      {/* Header: Titel + Actions */}
       <div
         style={{
           display: "flex",
@@ -27,7 +26,7 @@ export const EventLayout = ({ event, children, rightActions }) => {
             margin: 0,
           }}
         >
-          {event.title}
+          {event.name}
         </h1>
 
         {rightActions && (
@@ -42,7 +41,6 @@ export const EventLayout = ({ event, children, rightActions }) => {
         )}
       </div>
 
-      {/* Info Row */}
       <div
         style={{
           display: "flex",
@@ -75,7 +73,6 @@ export const EventLayout = ({ event, children, rightActions }) => {
         )}
       </div>
 
-      {/* Tabs + Panels */}
       <div>{children}</div>
     </div>
   );
