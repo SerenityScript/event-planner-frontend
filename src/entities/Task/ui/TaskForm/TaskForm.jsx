@@ -2,21 +2,20 @@ import { useState } from "react";
 import { SubmitButton } from "@/shared/ui";
 
 export const TaskForm = ({
-  initialValues = { text: "" },
+  initialValues = { title: "" },
   onSubmit,
   submitLabel = "Speichern",
 }) => {
-  const [text, setText] = useState(initialValues.text || "");
+  const [title, setTitle] = useState(initialValues.title  || "");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const trimmed = text.trim();
+    const trimmed = title .trim();
     if (!trimmed) return;
 
-    onSubmit?.({ text: trimmed });
+    onSubmit?.({ title : trimmed });
 
-    // для AddTask – очищаем, для EditTask можно тоже, модалка всё равно закроется
-    setText(initialValues.text || "");
+    setTitle(initialValues.title || "");
   };
 
   return (
@@ -36,8 +35,8 @@ export const TaskForm = ({
       <input
         type="text"
         placeholder="Neue Aufgabe hinzufügen..."
-        value={text}
-        onChange={(e) => setText(e.target.value)}
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
         style={{
           flex: 1,
           padding: "8px 10px",
@@ -48,7 +47,7 @@ export const TaskForm = ({
       />
 
       <div>
-        <SubmitButton disabled={!text.trim()}>
+        <SubmitButton disabled={!title.trim()}>
           {submitLabel}
         </SubmitButton>
       </div>
