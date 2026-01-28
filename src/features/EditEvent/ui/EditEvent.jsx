@@ -1,32 +1,37 @@
-// src/features/event/edit-event/ui/EditEvent.jsx
 import { useState } from "react";
 import { Modal } from "@/shared/ui";
 import { EventForm } from "@/entities/Event";
 import { EditButton } from "@/shared/ui";
+import { updateEvent } from "@/shared/api";
 
 export const EditEvent = ({ event, onUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!event) return null;
 
   const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    if (!isSubmitting) setIsOpen(false);
+  };
 
-  const handleSubmit = (formValues) => {
-    // EventForm работает с name, а твой event сейчас, скорее всего, с title
-    const updatedEvent = {
-      ...event,
-      title: formValues.name,
-      date: formValues.date,
-      time: formValues.time,
-      location: formValues.location,
-    };
+  const handleSubmit = async (payload) => {
+    try {
+      setIsSubmitting(true);
 
-    if (onUpdate) {
-      onUpdate(updatedEvent);
+      const result = await updateEvent(event._id, payload);
+
+      // backend у тебя возвращает { message, event } — если так:
+      const updated = result?.event ?? result;
+
+      onUpdate?.(updated);
+      setIsOpen(false);
+    } catch (e) {
+      console.error(e);
+      alert(e?.message || "Failed to update event");
+    } finally {
+      setIsSubmitting(false);
     }
-
-    handleClose();
   };
 
   return (
@@ -35,14 +40,11 @@ export const EditEvent = ({ event, onUpdate }) => {
       
       <Modal isOpen={isOpen} onClose={handleClose}>
         <EventForm
-          initialValues={{
-            name: event.title || "",
-            date: event.date || "",
-            time: event.time || "",
-            location: event.location || "",
-          }}
+          initialValues={event}
           submitLabel="Save Changes"
+          isSubmitting={isSubmitting}
           onSubmit={handleSubmit}
+          onBack={handleClose}
         />
       </Modal>
     </>
