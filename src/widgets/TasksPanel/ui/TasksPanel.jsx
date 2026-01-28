@@ -1,14 +1,65 @@
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { getTasks, updateTask } from "@/shared/api/tasks";
+
 import { AddTask } from "@/features/AddTask";
 import { EditTask } from "@/features/EditTask";
 import { DeleteTask } from "@/features/DeleteTask";
 import { AddedTask } from "@/entities/Task";
 
-export const TasksPanel = ({ tasks = [], onChangeTasks }) => {
-  const handleToggleTask = (id) => {
-    const updated = tasks.map((task) =>
-      task.id === id ? { ...task, done: !task.done } : task
-    );
-    onChangeTasks?.(updated);
+export const TasksPanel = ({ eventId, onCountChange }) => {
+  const [tasks, setTasks] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const loadTasks = useCallback(async () => {
+    if (!eventId) return;
+
+    setLoading(true);
+    try {
+      const data = await getTasks(eventId);
+      setTasks(data);
+    } catch (e) {
+      console.error(e);
+      alert(e?.message || "Failed to load tasks");
+    } finally {
+      setLoading(false);
+    }
+  }, [eventId]);
+
+  useEffect(() => {
+    loadTasks();
+  }, [loadTasks]);
+
+  // ✅ count (например, невыполненные)
+  const openCount = useMemo(
+    () => tasks.filter((t) => t.done !== true).length,
+    [tasks]
+  );
+
+  useEffect(() => {
+    onCountChange?.(openCount);
+  }, [openCount, onCountChange]);
+
+  const handleToggleTask = async (task) => {
+    try {
+      const nextDone = !task.done;
+
+      // optimistic UI
+      setTasks((prev) =>
+        prev.map((t) => (t._id === task._id ? { ...t, done: nextDone } : t))
+      );
+
+      const result = await updateTask(eventId, task._id, { done: nextDone });
+      const updated = result?.task ?? result;
+
+      // normalize from server
+      setTasks((prev) =>
+        prev.map((t) => (t._id === task._id ? updated : t))
+      );
+    } catch (e) {
+      console.error(e);
+      alert(e?.message || "Failed to update task");
+      loadTasks(); // rollback через перезагрузку
+    }
   };
 
   return (
@@ -20,12 +71,17 @@ export const TasksPanel = ({ tasks = [], onChangeTasks }) => {
         border: "1px solid #eee",
       }}
     >
-      
-      <AddTask tasks={tasks} onChangeTasks={onChangeTasks} />
+      {/* ✅ AddTask теперь работает через API */}
+      <AddTask eventId={eventId} onCreated={loadTasks} />
 
-      {/* Liste der Aufgaben */}
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-        {tasks.length === 0 && (
+      {loading && (
+        <p style={{ fontSize: "14px", color: "#777", margin: "8px 0 0" }}>
+          Lade Aufgaben…
+        </p>
+      )}
+
+      <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: 8 }}>
+        {!loading && tasks.length === 0 && (
           <p style={{ fontSize: "14px", color: "#777", margin: 0 }}>
             Noch keine Aufgaben. Füge die erste Aufgabe hinzu ✨
           </p>
@@ -33,21 +89,21 @@ export const TasksPanel = ({ tasks = [], onChangeTasks }) => {
 
         {tasks.map((task) => (
           <AddedTask
-            key={task.id}
+            key={task._id}
             task={task}
-            onToggle={() => handleToggleTask(task.id)}
-            onDelete={undefined} // не используем, т.к. выносим в feature
+            onToggle={() => handleToggleTask(task)}
+            onDelete={undefined}
             extraActions={
               <>
                 <EditTask
+                  eventId={eventId}
                   task={task}
-                  tasks={tasks}
-                  onChangeTasks={onChangeTasks}
+                  onUpdated={loadTasks}
                 />
                 <DeleteTask
-                  taskId={task.id}
-                  tasks={tasks}
-                  onChangeTasks={onChangeTasks}
+                  eventId={eventId}
+                  taskId={task._id}
+                  onDeleted={loadTasks}
                 />
               </>
             }
