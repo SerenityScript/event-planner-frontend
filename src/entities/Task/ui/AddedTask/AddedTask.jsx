@@ -27,7 +27,7 @@ export const AddedTask = ({ task, onToggle, extraActions }) => {
           color: task.done ? "#999" : "#333",
         }}
       >
-        {task.text}
+        {task.title}
       </span>
 
       <div
