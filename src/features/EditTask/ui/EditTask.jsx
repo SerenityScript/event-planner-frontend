@@ -2,21 +2,35 @@ import { useState } from "react";
 import { Modal } from "@/shared/ui";
 import { TaskForm } from "@/entities/Task";
 import { EditButton } from "@/shared/ui";
+import { updateTask } from "@/shared/api/tasks";
 
-export const EditTask = ({ task, tasks = [], onChangeTasks }) => {
+export const EditTask = ({ eventId, task, onUpdated }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!task) return null;
 
   const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    if (!isSubmitting) setIsOpen(false);
+  };
 
-  const handleSubmit = ({ text }) => {
-    const updated = tasks.map((t) =>
-      t.id === task.id ? { ...t, text } : t
-    );
-    onChangeTasks?.(updated);
-    handleClose();
+  const handleSubmit = async ({ title }) => {
+    try {
+      setIsSubmitting(true);
+
+      const result = await updateTask(eventId, task._id, { title });
+      const updated = result?.task ?? result;
+
+      onUpdated?.(updated);
+
+      setIsOpen(false);
+    } catch (e) {
+      console.error(e);
+      alert(e?.message || "Failed to update task");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -36,8 +50,8 @@ export const EditTask = ({ task, tasks = [], onChangeTasks }) => {
         </h3>
 
         <TaskForm
-          initialValues={{ text: task.text }}
-          submitLabel="Speichern"
+          initialValues={{ title: task.title }}
+          submitLabel={isSubmitting ? "Saving..." : "Speichern"}
           onSubmit={handleSubmit}
           />
           </div>
