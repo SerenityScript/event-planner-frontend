@@ -1,20 +1,28 @@
+import { useState } from "react";
 import { DishForm } from "@/entities/Dish";
+import { createDish } from "@/shared/api/dishes";
 
-export const AddDish = ({ dishes = [], onChangeDishes, responsibleOptions }) => {
-  const handleSubmit = (formValues) => {
-    const newDish = {
-      id: Date.now().toString() + Math.random().toString(16),
-      ...formValues,
-    };
+export const AddDish = ({ eventId, responsibleOptions, onCreated }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    onChangeDishes?.([...dishes, newDish]);
+  const handleSubmit = async (payload) => {
+    try {
+      setIsSubmitting(true);
+      await createDish(eventId, payload); // { name, responsible, note }
+      onCreated?.();
+    } catch (e) {
+      console.error(e);
+      alert(e?.message || "Failed to create dish");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <DishForm
       initialValues={{ name: "", responsible: "me", note: "" }}
       responsibleOptions={responsibleOptions}
-      submitLabel="Gericht hinzufügen"
+      submitLabel={isSubmitting ? "Adding..." : "Gericht hinzufügen"}
       onSubmit={handleSubmit}
     />
   );
