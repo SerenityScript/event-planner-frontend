@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SubmitButton } from "@/shared/ui";
 
 export const ShoppingForm = ({
@@ -10,6 +10,12 @@ export const ShoppingForm = ({
   const [name, setName] = useState(initialValues.name || "");
   const [qty, setQty] = useState(initialValues.qty || "");
   const [category, setCategory] = useState(initialValues.category || "food");
+
+  useEffect(() => {
+    setName(initialValues.name || "");
+    setQty(initialValues.qty || "");
+    setCategory(initialValues.category || "food");
+  }, [initialValues?.name, initialValues?.qty, initialValues?.category]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
