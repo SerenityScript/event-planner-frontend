@@ -1,19 +1,30 @@
+import { useState } from "react";
 import { GuestForm } from "@/entities/Guest";
+import { createGuest } from "@/shared/api/guests";
 
-export const AddGuest = ({ guests = [], onChangeGuests }) => {
-  const handleSubmit = (formValues) => {
-    const newGuest = {
-      id: Date.now().toString() + Math.random().toString(16),
-      ...formValues,
-    };
+export const AddGuest = ({ eventId, onCreated }) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-    onChangeGuests?.([...guests, newGuest]);
+  const handleSubmit = async (payload) => {
+    try {
+      setIsSubmitting(true);
+
+      // payload: { name, status }
+      await createGuest(eventId, payload);
+
+      onCreated?.();
+    } catch (e) {
+      console.error(e);
+      alert(e?.message || "Failed to create guest");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <GuestForm
       initialValues={{ name: "", status: "invited" }}
-      submitLabel="Gast hinzufügen"
+      submitLabel={isSubmitting ? "Adding..." : "Gast hinzufügen"}
       onSubmit={handleSubmit}
     />
   );
