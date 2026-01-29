@@ -2,26 +2,34 @@ import { useState } from "react";
 import { Modal } from "@/shared/ui";
 import { ShoppingForm } from "@/entities/Shopping";
 import { EditButton } from "@/shared/ui";
+import { updateShoppingItem } from "@/shared/api/shopping-items";
 
-export const EditShoppingItem = ({
-  item,
-  items = [],
-  onChangeItems,
-  categoryOptions,
-}) => {
+export const EditShoppingItem = ({ eventId, item, categoryOptions, onUpdated }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   if (!item) return null;
 
   const handleOpen = () => setIsOpen(true);
-  const handleClose = () => setIsOpen(false);
+  const handleClose = () => {
+    if (!isSubmitting) setIsOpen(false);
+  };
 
-  const handleSubmit = (formValues) => {
-    const updated = items.map((it) =>
-      it.id === item.id ? { ...it, ...formValues } : it
-    );
-    onChangeItems?.(updated);
-    handleClose();
+  const handleSubmit = async (formValues) => {
+    try {
+      setIsSubmitting(true);
+
+      // formValues: { name, qty, category }
+      await updateShoppingItem(eventId, item._id, formValues);
+
+      onUpdated?.();
+      setIsOpen(false);
+    } catch (e) {
+      console.error(e);
+      alert(e?.message || "Failed to update shopping item");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -30,13 +38,7 @@ export const EditShoppingItem = ({
 
       <Modal isOpen={isOpen} onClose={handleClose}>
         <div style={{ minWidth: "320px" }}>
-          <h3
-            style={{
-              marginTop: 0,
-              marginBottom: "12px",
-              fontSize: "18px",
-            }}
-          >
+          <h3 style={{ marginTop: 0, marginBottom: "12px", fontSize: "18px" }}>
             Einkauf bearbeiten
           </h3>
 
@@ -47,7 +49,7 @@ export const EditShoppingItem = ({
               category: item.category || "food",
             }}
             categoryOptions={categoryOptions}
-            submitLabel="Speichern"
+            submitLabel={isSubmitting ? "Saving..." : "Speichern"}
             onSubmit={handleSubmit}
           />
         </div>
