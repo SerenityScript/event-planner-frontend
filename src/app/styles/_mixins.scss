@@ -1,0 +1,53 @@
+@use "./variables" as *;
+
+@mixin button-style {
+  padding: 10px 20px;
+  background-color: $color-mint;
+  border: 1px solid #ffffff;
+  border-radius: 30px;
+  box-shadow: $box-shadow;
+  font-family: $font-base;
+  font-size: 18px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@mixin rows-style {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8;
+}
+
+@mixin item-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: $color-dark-gray;
+  letter-spacing: 1px;
+}
+
+@mixin form-select {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  color: $color-dark-gray;
+
+  &:focus {
+    outline: none;
+    border-color: $color-mint;
+    box-shadow: 0 0 0 2px $color-mint;
+  }
+}
+
+@mixin form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid #eee;
+}

@@ -1,0 +1,5 @@
+@use "@/app/styles/index" as *;
+
+.button {
+  @include button-style;
+}

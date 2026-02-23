@@ -1,44 +1,23 @@
-export const AddedTask = ({ task, onToggle, extraActions }) => {
+import styles from "./AddedTask.module.scss";
+
+export const AddedTask = ({ task, onToggle, actions }) => {
   if (!task) return null;
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        padding: "8px 10px",
-        borderRadius: "8px",
-        backgroundColor: "#fff",
-        border: "1px solid #eee",
-      }}
-    >
+    <div className={styles.card}>
       <input
         type="checkbox"
         checked={task.done}
         onChange={onToggle}
+        className={styles.checkbox}
+        aria-label="Aufgabe erledigt"
       />
 
-      <span
-        style={{
-          flex: 1,
-          fontSize: "14px",
-          textDecoration: task.done ? "line-through" : "none",
-          color: task.done ? "#999" : "#333",
-        }}
-      >
+      <span className={`${styles.title} ${task.done ? styles.done : ""}`}>
         {task.title}
       </span>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "4px",
-          alignItems: "center",
-        }}
-      >
-        {extraActions}
-      </div>
+      <div className={styles.actions}>{actions}</div>
     </div>
   );
 };

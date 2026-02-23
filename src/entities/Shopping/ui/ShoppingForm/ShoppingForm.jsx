@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { SubmitButton } from "@/shared/ui";
+import styles from "./ShoppingForm.module.scss";
 
 export const ShoppingForm = ({
   initialValues = { name: "", qty: "", category: "food" },
@@ -35,40 +36,20 @@ export const ShoppingForm = ({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "8px",
-        marginBottom: "12px",
-      }}
-    >
-      <div style={{ display: "flex", gap: "8px" }}>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.row}>
         <input
           type="text"
           placeholder="Artikel (z.B. Orangensaft)"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={{
-            flex: 2,
-            padding: "8px 10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "14px",
-          }}
+          className={styles.inputWide}
         />
 
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value)}
-          style={{
-            flex: 1,
-            padding: "8px 10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "14px",
-          }}
+          className={styles.select}
         >
           {categoryOptions.map((opt) => (
             <option value={opt.value} key={opt.value}>
@@ -83,15 +64,10 @@ export const ShoppingForm = ({
         placeholder="Menge (z.B. 3 L)"
         value={qty}
         onChange={(e) => setQty(e.target.value)}
-        style={{
-          padding: "8px 10px",
-          borderRadius: "8px",
-          border: "1px solid #ccc",
-          fontSize: "14px",
-        }}
+        className={styles.input}
       />
 
-      <div>
+      <div className={styles.actions}>
         <SubmitButton disabled={!name.trim()}>
           {submitLabel}
         </SubmitButton>

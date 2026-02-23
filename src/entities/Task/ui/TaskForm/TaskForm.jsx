@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SubmitButton } from "@/shared/ui";
+import styles from "./TaskForm.module.scss";
 
 export const TaskForm = ({
   initialValues = { title: "" },
@@ -19,34 +20,16 @@ export const TaskForm = ({
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "8px",
-        marginBottom: "16px",
-        padding: "8px 10px",
-        borderRadius: "10px",
-        backgroundColor: "#fff",
-        border: "1px solid #eee",
-      }}
-    >
+    <form onSubmit={handleSubmit} className={styles.form}>
       <input
         type="text"
         placeholder="Neue Aufgabe hinzufügen..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        style={{
-          flex: 1,
-          padding: "8px 10px",
-          borderRadius: "8px",
-          border: "1px solid #ccc",
-          fontSize: "14px",
-        }}
+        className={styles.input}
       />
 
-      <div>
+      <div  className={styles.actions}>
         <SubmitButton disabled={!title.trim()}>
           {submitLabel}
         </SubmitButton>

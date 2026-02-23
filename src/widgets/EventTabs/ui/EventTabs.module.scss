@@ -1,0 +1,22 @@
+@use "@/app/styles/index" as *;
+
+.tabsRow {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.tabButton {
+  padding: 10px 8px;
+  border: none;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  background-color: rgba(167, 219, 218, 0.2);
+  font-family: $font-base;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: $color-mint;
+}

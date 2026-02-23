@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { toISODate, isValidTime } from "@/shared/utils";
 import { mapFormToPayload, mapInitialToForm, validateEventForm } from "@/entities/Event/lib";
-
+import styles from "./EventForm.module.scss";
 
 export const EventForm = ({
   initialValues = { name: "", date: "", time: "", location: "" },
   onSubmit,
-  onBack,
   submitLabel = "Save Changes",
   isSubmitting = false,
 }) => {
@@ -27,14 +26,14 @@ export const EventForm = ({
       const iso = toISODate(value);
       setErrors((prev) => ({
         ...prev,
-        date: value.trim() === "" ? "" : iso ? "" : "Use format DD.MM.YYYY (e.g. 02.04.2026)",
+        date: value.trim() === "" ? "" : iso ? "" : "Datumsformat - TT.MM.JJJJ (Beispiel - 02.04.2026)",
       }));
     }
 
     if (field === "time") {
       setErrors((prev) => ({
         ...prev,
-        time: value.trim() === "" ? "" : isValidTime(value) ? "" : "Use format HH:mm (e.g. 15:00)",
+        time: value.trim() === "" ? "" : isValidTime(value) ? "" : "Format HH:mm (Beispiel - 15:00)",
       }));
     }
   };
@@ -53,92 +52,81 @@ export const EventForm = ({
   };
 
   return (
-    <div className="event-form">
-      <header className="event-form__header">
-        <button
-          type="button"
-          className="event-form__back-button"
-          aria-label="Back"
-          onClick={onBack}
-        >
-          ←
-        </button>
-        <h1 className="event-form__title">Event Details</h1>
+    <div>
+      <header>
+        <h1>Neues Event</h1>
       </header>
 
-      <form className="event-form__body" onSubmit={handleSubmit}>
-        <div className="event-form__field">
-          <label className="event-form__label" htmlFor="event-name">
+      <form onSubmit={handleSubmit}>
+        <div className={styles.eventFormField}>
+          <label className={styles.eventFormLabel} htmlFor="event-name">
             Event Name
           </label>
           <input
             id="event-name"
             type="text"
-            className="event-form__input"
-            placeholder="John's Birthday Party"
+            className={styles.eventFormInput}
+            placeholder="Geburtstagsfeier"
             value={form.name}
             onChange={handleChange("name")}
           />
         </div>
-
-        <div className="event-form__row">
-          <div className="event-form__field event-form__field--half">
-            <label className="event-form__label" htmlFor="event-date">
-              Date
-            </label>
-            <input
-              id="event-date"
-              type="text"
-              className="event-form__input"
-              placeholder="02.04.2026"
-              value={form.date}
-              onChange={handleChange("date")}
-              inputMode="numeric"
-              aria-invalid={Boolean(errors.date)}
-            />
-            {errors.date && <div className="event-form__error">{errors.date}</div>}
-          </div>
-
-          <div className="event-form__field event-form__field--half">
-            <label className="event-form__label" htmlFor="event-time">
-              Time
-            </label>
-            <input
-              id="event-time"
-              type="text"
-              className="event-form__input"
-              placeholder="15:00"
-              value={form.time}
-              onChange={handleChange("time")}
-              inputMode="numeric"
-              aria-invalid={Boolean(errors.time)}
-            />
-            {errors.time && <div className="event-form__error">{errors.time}</div>}
-          </div>
-        </div>
-
-        <div className="event-form__field">
-          <label className="event-form__label" htmlFor="event-location">
-            Location
+        
+        <div className={styles.eventFormField}>
+          <label className={styles.eventFormLabel} htmlFor="event-date">
+            Datum
           </label>
-          <div className="event-form__input-wrapper">
+          <input
+            id="event-date"
+            type="text"
+            className={styles.eventFormInput}
+            placeholder="02.04.2026"
+            value={form.date}
+            onChange={handleChange("date")}
+            inputMode="numeric"
+            aria-invalid={Boolean(errors.date)}
+          />
+          {errors.date && <div className="event-form__error">{errors.date}</div>}
+        </div>
+        <div className={styles.eventFormField}>
+          <label className={styles.eventFormLabel} htmlFor="event-time">
+            Uhrzeit
+          </label>
+          <input
+            id="event-time"
+            type="text"
+            className={styles.eventFormInput}
+            placeholder="15:00"
+            value={form.time}
+            onChange={handleChange("time")}
+            inputMode="numeric"
+            aria-invalid={Boolean(errors.time)}
+          />
+          {errors.time && <div className="event-form__error">{errors.time}</div>}
+        </div>
+        
+
+        <div className={styles.eventFormField}>
+          <label className={styles.eventFormLabel} htmlFor="event-location">
+            Standort
+          </label>
+          
             <input
               id="event-location"
               type="text"
-              className="event-form__input event-form__input--with-icon"
-              placeholder="Restaurant / Park / Address"
+              className={styles.eventFormInput}
+              placeholder="Restaurant / Park / Adresse"
               value={form.location}
               onChange={handleChange("location")}
             />
-            <span className="event-form__icon" aria-hidden="true">
-              📍
-            </span>
-          </div>
+            
+          
         </div>
-
-        <button type="submit" className="event-form__submit" disabled={isSubmitting}>
-          {isSubmitting ? "Saving..." : submitLabel}
-        </button>
+        <div className={styles.eventFormBtnContainer}>
+          <button type="submit" className={styles.eventFormBtn} disabled={isSubmitting}>
+            {isSubmitting ? "Saving..." : submitLabel}
+          </button>
+        </div>
       </form>
     </div>
   );

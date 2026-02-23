@@ -4,6 +4,8 @@ export const getEvents = () => request("/api/events");
 
 export const getEventById = (id) => request(`/api/events/${id}`);
 
+export const getEventCounts = (id) => request(`/api/events/${id}/counts`);
+
 export const createEvent = (payload) =>
   request("/api/events", {
     method: "POST",

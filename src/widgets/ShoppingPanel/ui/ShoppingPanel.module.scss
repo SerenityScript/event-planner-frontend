@@ -1,0 +1,9 @@
+@use "@/app/styles/index" as *;
+
+.panelCont {
+  padding: 12px;
+}
+
+.rows {
+  @include rows-style;
+}

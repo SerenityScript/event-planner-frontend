@@ -1,0 +1,14 @@
+@use "@/app/styles/index" as *;
+
+.form {
+  @include form;
+}
+
+.input {
+  flex: 1;
+  @include form-select;
+}
+
+.actions {
+  display: flex;
+}

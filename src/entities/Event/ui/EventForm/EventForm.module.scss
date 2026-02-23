@@ -1,0 +1,40 @@
+@use "@/app/styles/index" as *;
+
+.eventFormField {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.eventFormLabel {
+  color: $color-gray;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.eventFormInput {
+  width: auto;
+  height: 40px;
+  padding: 0 0 0 40px;
+  border-radius: 7px;
+  outline: none;
+  border: 1px solid #e5e5e5;
+  
+  &:focus {
+    outline: none;
+    border-color: $color-mint;
+    box-shadow: 0 0 0 2px $color-mint;
+  }
+}
+
+.eventFormBtnContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.eventFormBtn {
+  @include button-style;
+  margin-top: 20px;
+  text-align: center;
+}

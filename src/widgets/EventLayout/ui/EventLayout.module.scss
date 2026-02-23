@@ -1,0 +1,37 @@
+@use "@/app/styles/index" as *;
+
+.mainCont {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.heading {
+  font-size: 24px;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.metaLabel {
+  margin-right: 8px;
+  font-weight: 600;
+  color: #3694a5;
+  letter-spacing: 1px;
+}

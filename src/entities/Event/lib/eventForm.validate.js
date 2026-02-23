@@ -5,7 +5,7 @@ export const validateEventForm = (form) => {
   const okTime = isValidTime(form.time);
 
   return {
-    date: isoDate ? "" : "Use format DD.MM.YYYY (e.g. 02.04.2026)",
-    time: okTime ? "" : "Use format HH:mm (e.g. 15:00)",
+    date: isoDate ? "" : "Datumsformat - TT.MM.JJJJ (Beispiel - 02.04.2026)",
+    time: okTime ? "" : "Format HH:mm (Beispiel - 15:00)",
   };
 };

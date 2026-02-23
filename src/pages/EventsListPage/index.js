@@ -1,0 +1,1 @@
+export { EventListPageLazy as EventListPage } from "./lazy";

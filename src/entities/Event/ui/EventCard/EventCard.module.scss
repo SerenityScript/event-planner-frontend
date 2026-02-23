@@ -1,0 +1,27 @@
+@use "@/app/styles/index" as *;
+
+.card {
+  box-sizing: border-box;
+  width: 100%;
+  
+  height: 160px;
+  margin: 20px 0;
+  padding: 0 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 28px;
+  cursor: pointer;
+
+  background: $linear-background;
+  border: 1px solid #ffffff;
+
+  box-shadow: $box-shadow;
+
+  h2 {
+    margin: 0;
+    color: $color-mint;
+  }
+}

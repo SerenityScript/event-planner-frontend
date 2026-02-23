@@ -1,4 +1,5 @@
 import { tabs } from "../lib/tabs";
+import styles from "./EventTabs.module.scss";
 
 export const EventTabs = ({
   activeTab,
@@ -9,14 +10,7 @@ export const EventTabs = ({
   shoppingCount,
 }) => {
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "8px",
-        marginTop: "16px",
-        marginBottom: "16px",
-      }}
-    >
+    <div className={styles.tabsRow}>
       {tabs.map((tab) => {
         const isActive = tab.id === activeTab;
 
@@ -49,17 +43,7 @@ export const EventTabs = ({
             key={tab.id}
             type="button"
             onClick={() => onTabChange(tab.id)}
-            style={{
-              padding: "8px 16px",
-              borderRadius: "20px",
-              border: isActive ? "1px solid #ff8a00" : "1px solid #ccc",
-              backgroundColor: isActive ? "#ff8a00" : "#f7f7f7",
-              color: isActive ? "#fff" : "#333",
-              cursor: "pointer",
-              fontSize: "14px",
-              fontWeight: isActive ? "600" : "400",
-              transition: "all 0.2s ease",
-            }}
+            className={`${styles.tabButton} ${isActive ? styles.active : ""}`}
           >
             {label}
           </button>

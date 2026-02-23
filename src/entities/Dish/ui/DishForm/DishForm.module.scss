@@ -1,0 +1,27 @@
+@use "@/app/styles/index" as *;
+
+.form {
+  @include form;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  flex: 1;
+  @include form-select;
+}
+
+.select {
+  @include form-select;
+}
+
+.textarea {
+  @include form-select;
+}
+
+.actions {
+  display: flex;
+}

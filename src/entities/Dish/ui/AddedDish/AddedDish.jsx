@@ -1,4 +1,6 @@
-export const AddedDish = ({ dish, extraActions }) => {
+import styles from "./AddedDish.module.scss";
+
+export const AddedDish = ({ dish, actions }) => {
   if (!dish) return null;
 
   const mapResponsible = (value) => {
@@ -9,67 +11,24 @@ export const AddedDish = ({ dish, extraActions }) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "4px",
-        padding: "8px 10px",
-        borderRadius: "8px",
-        backgroundColor: "#fff",
-        border: "1px solid #eee",
-      }}
-    >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "8px",
-        }}
-      >
-        <div style={{ flex: 2 }}>
-          <div
-            style={{
-              fontSize: "14px",
-              fontWeight: 600,
-              marginBottom: "2px",
-            }}
-          >
-            {dish.name}
-          </div>
+    <div className={styles.card}>
+      <div className={styles.row}>
+        <div className={styles.info}>
+          <div className={styles.title}>{dish.name}</div>
+
           {dish.note && (
-            <div
-              style={{
-                fontSize: "12px",
-                color: "#777",
-              }}
-            >
+            <div className={styles.note}>
               {dish.note}
             </div>
           )}
         </div>
 
-        <div
-          style={{
-            flex: 1,
-            fontSize: "12px",
-            color: "#555",
-            textAlign: "right",
-          }}
-        >
+        <div className={styles.responsible}>
           {mapResponsible(dish.responsible)}
         </div>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          gap: "4px",
-        }}
-      >
-        {extraActions ?? null}
-      </div>
+      <div className={styles.actions}>{actions}</div>
     </div>
   );
 };

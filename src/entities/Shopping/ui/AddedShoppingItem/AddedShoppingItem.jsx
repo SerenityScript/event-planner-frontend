@@ -1,4 +1,6 @@
-export const AddedShoppingItem = ({ item, onToggleBought, extraActions }) => {
+import styles from "./AddedShoppingItem.module.scss";
+
+export const AddedShoppingItem = ({ item, onToggleBought, actions }) => {
   if (!item) return null;
 
   const mapCategory = (value) => {
@@ -10,67 +12,35 @@ export const AddedShoppingItem = ({ item, onToggleBought, extraActions }) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        padding: "8px 10px",
-        borderRadius: "8px",
-        backgroundColor: "#fff",
-        border: "1px solid #eee",
-      }}
-    >
+    <div className={styles.card}>
       <input
         type="checkbox"
         checked={item.bought}
         aria-label="Artikel gekauft"
         onChange={onToggleBought}
+        className={styles.checkbox}
       />
 
-      <div style={{ flex: 2 }}>
+      <div className={styles.info}>
         <div
-          style={{
-            fontSize: "14px",
-            fontWeight: 600,
-            textDecoration: item.bought ? "line-through" : "none",
-            color: item.bought ? "#999" : "#333",
-          }}
+          className={`${styles.name} ${
+            item.bought ? styles.bought : ""
+          }`}
         >
           {item.name}
         </div>
         {item.qty && (
-          <div
-            style={{
-              fontSize: "12px",
-              color: "#777",
-            }}
-          >
+          <div className={styles.qty}>
             {item.qty}
           </div>
         )}
       </div>
 
-      <div
-        style={{
-          flex: 1,
-          fontSize: "12px",
-          color: "#555",
-          textAlign: "right",
-        }}
-      >
+      <div className={styles.category}>
         {mapCategory(item.category)}
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "4px",
-          alignItems: "center",
-        }}
-      >
-        {extraActions ?? null}
-      </div>
+      <div className={styles.actions}>{actions}</div>
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SubmitButton } from "@/shared/ui";
+import styles from "./GuestForm.module.scss";
 
 export const GuestForm = ({
   initialValues = { name: "", status: "invited" },
@@ -27,16 +28,7 @@ export const GuestForm = ({
   return (
     <form
       onSubmit={handleSubmit}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "8px",
-        marginBottom: "16px",
-        padding: "8px 10px",
-        borderRadius: "10px",
-        backgroundColor: "#fff",
-        border: "1px solid #eee",
-      }}
+      className={styles.form}
     >
       <div style={{ display: "flex", gap: "8px" }}>
         <input
@@ -44,25 +36,13 @@ export const GuestForm = ({
           placeholder="Name des Gastes"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={{
-            flex: 1,
-            padding: "8px 10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "14px",
-          }}
+          className={styles.input}
         />
 
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          style={{
-            width: "180px",
-            padding: "8px 10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "14px",
-          }}
+          className={styles.select}
         >
           <option value="invited">Eingeladen</option>
           <option value="confirmed">Bestätigt</option>
@@ -70,7 +50,7 @@ export const GuestForm = ({
         </select>
       </div>
 
-      <div>
+      <div className={styles.actions}>
         <SubmitButton disabled={!name.trim()}>
           {submitLabel}
         </SubmitButton>

@@ -1,12 +1,12 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { getTasks, updateTask } from "@/shared/api/tasks";
-
 import { AddTask } from "@/features/AddTask";
 import { EditTask } from "@/features/EditTask";
 import { DeleteTask } from "@/features/DeleteTask";
 import { AddedTask } from "@/entities/Task";
+import styles from "./TasksPanel.module.scss";
 
-export const TasksPanel = ({ eventId, onCountChange }) => {
+export const TasksPanel = ({ eventId, onChanged }) => {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -16,7 +16,7 @@ export const TasksPanel = ({ eventId, onCountChange }) => {
     setLoading(true);
     try {
       const data = await getTasks(eventId);
-      setTasks(data);
+      setTasks(Array.isArray(data) ? data : []);
     } catch (e) {
       console.error(e);
       alert(e?.message || "Failed to load tasks");
@@ -29,21 +29,10 @@ export const TasksPanel = ({ eventId, onCountChange }) => {
     loadTasks();
   }, [loadTasks]);
 
-  // ✅ count (например, невыполненные)
-  const openCount = useMemo(
-    () => tasks.filter((t) => t.done !== true).length,
-    [tasks]
-  );
-
-  useEffect(() => {
-    onCountChange?.(openCount);
-  }, [openCount, onCountChange]);
-
   const handleToggleTask = async (task) => {
     try {
       const nextDone = !task.done;
 
-      // optimistic UI
       setTasks((prev) =>
         prev.map((t) => (t._id === task._id ? { ...t, done: nextDone } : t))
       );
@@ -51,40 +40,33 @@ export const TasksPanel = ({ eventId, onCountChange }) => {
       const result = await updateTask(eventId, task._id, { done: nextDone });
       const updated = result?.task ?? result;
 
-      // normalize from server
-      setTasks((prev) =>
-        prev.map((t) => (t._id === task._id ? updated : t))
-      );
+      setTasks((prev) => prev.map((t) => (t._id === task._id ? updated : t)));
+
+      onChanged?.();
     } catch (e) {
       console.error(e);
       alert(e?.message || "Failed to update task");
-      loadTasks(); // rollback через перезагрузку
+      loadTasks();
     }
   };
 
   return (
-    <div
-      style={{
-        padding: "12px",
-        borderRadius: "12px",
-        backgroundColor: "#fafafa",
-        border: "1px solid #eee",
-      }}
-    >
-      {/* ✅ AddTask теперь работает через API */}
-      <AddTask eventId={eventId} onCreated={loadTasks} />
+    <div className={styles.panelCont}>
+      <AddTask
+        eventId={eventId}
+        onCreated={async () => {
+          await loadTasks();
+          onChanged?.();
+        }}
+      />
 
       {loading && (
-        <p style={{ fontSize: "14px", color: "#777", margin: "8px 0 0" }}>
-          Lade Aufgaben…
-        </p>
+        <p>Lade Aufgaben…</p>
       )}
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "8px", marginTop: 8 }}>
+      <div className={styles.rows}>
         {!loading && tasks.length === 0 && (
-          <p style={{ fontSize: "14px", color: "#777", margin: 0 }}>
-            Noch keine Aufgaben. Füge die erste Aufgabe hinzu ✨
-          </p>
+          <p>Noch keine Aufgaben. Füge die erste Aufgabe hinzu ✨</p>
         )}
 
         {tasks.map((task) => (
@@ -93,17 +75,23 @@ export const TasksPanel = ({ eventId, onCountChange }) => {
             task={task}
             onToggle={() => handleToggleTask(task)}
             onDelete={undefined}
-            extraActions={
+            actions={
               <>
                 <EditTask
                   eventId={eventId}
                   task={task}
-                  onUpdated={loadTasks}
+                  onUpdated={async () => {
+                    await loadTasks();
+                    onChanged?.();
+                  }}
                 />
                 <DeleteTask
                   eventId={eventId}
                   taskId={task._id}
-                  onDeleted={loadTasks}
+                  onDeleted={async () => {
+                    await loadTasks();
+                    onChanged?.();
+                  }}
                 />
               </>
             }

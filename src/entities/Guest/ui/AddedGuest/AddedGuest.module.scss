@@ -1,0 +1,34 @@
+@use "@/app/styles/index" as *;
+
+.card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  border: 1px solid #eee;
+}
+
+.nameCol {
+  flex: 2;
+}
+
+.name {
+  @include item-title;
+}
+
+.statusCol {
+  flex: 1;
+}
+
+.select {
+  width: 100%;
+  @include form-select;
+}
+
+.actions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}

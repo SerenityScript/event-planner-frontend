@@ -1,0 +1,26 @@
+@use "@/app/styles/index" as *;
+
+.mainCont {
+  padding: 8px;
+}
+
+.backButton {
+  background: none;
+  border: none;
+  color: $color-mint;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 3px;
+  padding: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.tabsCont {
+  border: 5px solid $color-mint;
+  border-radius: 18px;
+  background: #fafafa;
+}

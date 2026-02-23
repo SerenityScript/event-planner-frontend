@@ -41,7 +41,7 @@ export const EditEvent = ({ event, onUpdate }) => {
       <Modal isOpen={isOpen} onClose={handleClose}>
         <EventForm
           initialValues={event}
-          submitLabel="Save Changes"
+          submitLabel="Speichern"
           isSubmitting={isSubmitting}
           onSubmit={handleSubmit}
           onBack={handleClose}

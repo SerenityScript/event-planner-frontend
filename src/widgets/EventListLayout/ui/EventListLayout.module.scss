@@ -1,0 +1,18 @@
+@use "@/app/styles/index" as *;
+
+.main {
+  min-height: 100vh;
+  padding: 20px 40px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.title {
+  margin: 0;
+}

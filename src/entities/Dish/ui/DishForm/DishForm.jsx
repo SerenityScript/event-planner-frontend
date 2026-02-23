@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { SubmitButton } from "@/shared/ui";
+import styles from "./DishForm.module.scss";
 
 export const DishForm = ({
   initialValues = { name: "", responsible: "me", note: "" },
@@ -23,50 +24,26 @@ export const DishForm = ({
       note: note.trim(),
     });
 
-    // для AddDish — можно сбросить, для EditDish модалка всё равно закроется
     setName(initialValues.name || "");
     setResponsible(initialValues.responsible || "me");
     setNote(initialValues.note || "");
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "8px",
-        marginBottom: "16px",
-        padding: "8px 10px",
-        borderRadius: "10px",
-        backgroundColor: "#fff",
-        border: "1px solid #eee",
-      }}
-    >
-      <div style={{ display: "flex", gap: "8px" }}>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <div className={styles.row}>
         <input
           type="text"
           placeholder="Gericht (z.B. Caesar Salat)"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          style={{
-            flex: 1,
-            padding: "8px 10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "14px",
-          }}
+          className={styles.input}
         />
 
         <select
           value={responsible}
           onChange={(e) => setResponsible(e.target.value)}
-          style={{
-            padding: "8px 10px",
-            borderRadius: "8px",
-            border: "1px solid #ccc",
-            fontSize: "14px",
-          }}
+          className={styles.select}
         >
           {responsibleOptions.map((opt) => (
             <option value={opt.value} key={opt.value}>
@@ -81,16 +58,10 @@ export const DishForm = ({
         value={note}
         onChange={(e) => setNote(e.target.value)}
         rows={2}
-        style={{
-          padding: "8px 10px",
-          borderRadius: "8px",
-          border: "1px solid #ccc",
-          fontSize: "14px",
-          resize: "vertical",
-        }}
+        className={styles.textarea}
       />
 
-      <div>
+      <div className={styles.actions}>
         <SubmitButton disabled={!name.trim()}>
           {submitLabel}
         </SubmitButton>

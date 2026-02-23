@@ -1,0 +1,43 @@
+@use "@/app/styles/index" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px solid #eee;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.info {
+  flex: 2;
+}
+
+.title {
+  @include item-title;
+}
+
+.note {
+  font-size: 12px;
+  color: #777;
+}
+
+.responsible {
+  flex: 1;
+  font-size: 12px;
+  color: #555;
+  text-align: right;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
