@@ -1,5 +1,7 @@
-export const request = async (url, options) => {
-  const res = await fetch(url, options);
+const API_URL = import.meta.env.VITE_API_URL;
+
+export const request = async (path, options = {}) => {
+  const res = await fetch(`${API_URL}${path}`, options);
 
   const data = await res.json().catch(() => null);
 
@@ -10,4 +12,6 @@ export const request = async (url, options) => {
   return data;
 };
 
-export const JSON_HEADERS = { "Content-Type": "application/json" };
+export const JSON_HEADERS = {
+  "Content-Type": "application/json",
+};

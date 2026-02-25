@@ -1,20 +1,20 @@
-import { request } from "./base";
+import { JSON_HEADERS, request } from "./base";
 
-export const getDishes = (eventId) => request(`/api/events/${eventId}/dishes`);
+export const getDishes = (eventId) => request(`/events/${eventId}/dishes`);
 
 export const createDish = (eventId, payload) =>
-  request(`/api/events/${eventId}/dishes`, {
+  request(`/events/${eventId}/dishes`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: JSON_HEADERS,
     body: JSON.stringify(payload),
   });
 
 export const updateDish = (eventId, id, payload) =>
-  request(`/api/events/${eventId}/dishes/${id}`, {
+  request(`/events/${eventId}/dishes/${id}`, {
     method: "PATCH",
-    headers: { "Content-Type": "application/json" },
+    headers: JSON_HEADERS,
     body: JSON.stringify(payload),
   });
 
 export const deleteDish = (eventId, id) =>
-  request(`/api/events/${eventId}/dishes/${id}`, { method: "DELETE" });
+  request(`/events/${eventId}/dishes/${id}`, { method: "DELETE" });
