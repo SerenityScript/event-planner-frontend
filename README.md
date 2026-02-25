@@ -8,9 +8,9 @@ This application allows users to create and manage events, guests, tasks, dishes
 ## 🚀 Demo
 
 🔗 **Try the application here:** 
-[https://nutrition-analysis-serenityscript.netlify.app/](https://nutrition-analysis-serenityscript.netlify.app/)
+[https://event-planner-serenityscript.netlify.app/events](https://event-planner-serenityscript.netlify.app/events)
 
-[![Event Planner Preview](assets/demo.png)](https://nutrition-analysis-serenityscript.netlify.app/)
+[![Event Planner Preview](assets/demo.png)](https://event-planner-serenityscript.netlify.app/events)
 
 ---
 ## ✨ Features
