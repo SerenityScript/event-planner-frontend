@@ -10,12 +10,10 @@ export const AddedGuest = ({
 
   return (
     <div className={styles.card}>
-      {/* Name */}
       <div className={styles.nameCol}>
         <div className={styles.name}>{guest.name}</div>
       </div>
 
-      {/* Status Select */}
       <div className={styles.statusCol}>
         <select
           value={guest.status || "invited"}

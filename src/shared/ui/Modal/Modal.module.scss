@@ -1,0 +1,26 @@
+@use "@/app/styles/index" as *;
+
+.modalMainCont {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.modalCont {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  min-width: 320px;
+  max-width: 90vw;
+}
+
+.closeBtn {
+  float: right;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}

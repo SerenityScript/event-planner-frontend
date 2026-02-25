@@ -30,7 +30,7 @@ export const GuestForm = ({
       onSubmit={handleSubmit}
       className={styles.form}
     >
-      <div style={{ display: "flex", gap: "8px" }}>
+      <div className={styles.row}>
         <input
           type="text"
           placeholder="Name des Gastes"

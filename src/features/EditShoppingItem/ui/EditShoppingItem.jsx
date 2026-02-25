@@ -3,6 +3,7 @@ import { Modal } from "@/shared/ui";
 import { ShoppingForm } from "@/entities/Shopping";
 import { EditButton } from "@/shared/ui";
 import { updateShoppingItem } from "@/shared/api/shopping-items";
+import styles from "./EditShoppingItem.module.scss";
 
 export const EditShoppingItem = ({ eventId, item, categoryOptions, onUpdated }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,8 +38,8 @@ export const EditShoppingItem = ({ eventId, item, categoryOptions, onUpdated }) 
       <EditButton onClick={handleOpen} />
 
       <Modal isOpen={isOpen} onClose={handleClose}>
-        <div style={{ minWidth: "320px" }}>
-          <h3 style={{ marginTop: 0, marginBottom: "12px", fontSize: "18px" }}>
+        <div>
+          <h3 className={styles.heading}>
             Einkauf bearbeiten
           </h3>
 

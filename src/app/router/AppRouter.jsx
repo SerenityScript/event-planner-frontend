@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import EventListPage from "@/pages/EventsListPage/ui/EventListPage";
+import { EventListPage } from "@/pages/EventsListPage";
 import { EventDetailsPage } from "@/pages/EventDetailsPage";
 
 export function AppRouter() {

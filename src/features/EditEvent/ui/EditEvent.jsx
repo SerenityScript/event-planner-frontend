@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Modal } from "@/shared/ui";
+import { Modal, EditButton } from "@/shared/ui";
 import { EventForm } from "@/entities/Event";
-import { EditButton } from "@/shared/ui";
 import { updateEvent } from "@/shared/api";
 
 export const EditEvent = ({ event, onUpdate }) => {
@@ -11,6 +10,7 @@ export const EditEvent = ({ event, onUpdate }) => {
   if (!event) return null;
 
   const handleOpen = () => setIsOpen(true);
+
   const handleClose = () => {
     if (!isSubmitting) setIsOpen(false);
   };
@@ -20,14 +20,15 @@ export const EditEvent = ({ event, onUpdate }) => {
       setIsSubmitting(true);
 
       const result = await updateEvent(event._id, payload);
-
-      // backend у тебя возвращает { message, event } — если так:
       const updated = result?.event ?? result;
+
+      if (!updated) throw new Error("Failed to update event");
 
       onUpdate?.(updated);
       setIsOpen(false);
     } catch (e) {
       console.error(e);
+      // TODO: заменить на общий notify/toast
       alert(e?.message || "Failed to update event");
     } finally {
       setIsSubmitting(false);
@@ -37,8 +38,12 @@ export const EditEvent = ({ event, onUpdate }) => {
   return (
     <>
       <EditButton onClick={handleOpen} />
-      
+
       <Modal isOpen={isOpen} onClose={handleClose}>
+        <header>
+          <h1>Event Bearbeiten</h1>
+        </header>
+
         <EventForm
           initialValues={event}
           submitLabel="Speichern"

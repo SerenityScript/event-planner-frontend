@@ -1,19 +1,12 @@
-import { FaTrashAlt  } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
+import styles from "./DeleteButton.module.scss";
 
 export const DeleteButton = ({ onClick }) => {
   return (
     <button
       type="button"
       onClick={onClick}
-      style={{
-        border: "none",
-        background: "transparent",
-        cursor: "pointer",
-        padding: "4px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      className={styles.deleteButton}
       aria-label="Delete"
     >
       <FaTrashAlt  size={18} color="#d11" />

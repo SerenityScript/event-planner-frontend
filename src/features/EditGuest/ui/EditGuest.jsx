@@ -3,6 +3,7 @@ import { Modal } from "@/shared/ui";
 import { GuestForm } from "@/entities/Guest";
 import { EditButton } from "@/shared/ui";
 import { updateGuest } from "@/shared/api/guests";
+import styles from "./EditGuest.module.scss";
 
 export const EditGuest = ({ eventId, guest, onUpdated }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,8 +37,8 @@ export const EditGuest = ({ eventId, guest, onUpdated }) => {
       <EditButton onClick={handleOpen} />
 
       <Modal isOpen={isOpen} onClose={handleClose}>
-        <div style={{ minWidth: "320px" }}>
-          <h3 style={{ marginTop: 0, marginBottom: "12px", fontSize: "18px" }}>
+        <div>
+          <h3 className={styles.heading}>
             Gast bearbeiten
           </h3>
 

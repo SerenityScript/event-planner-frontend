@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { deleteEvent } from "@/shared/api/events";
 import { DeleteButton } from "@/shared/ui";
+import { useConfirm } from "@/shared/ui/Confirm";
 
 export const DeleteEvent = ({ eventId, onDeleted }) => {
   const [isDeleting, setIsDeleting] = useState(false);
+  const confirm = useConfirm();
 
   const handleDelete = async () => {
     if (!eventId || isDeleting) return;
 
-    const confirmed = window.confirm("Event wirklich löschen?");
-    if (!confirmed) return;
+    const ok = await confirm("Event wirklich löschen?");
+    if (!ok) return;
 
     try {
       setIsDeleting(true);

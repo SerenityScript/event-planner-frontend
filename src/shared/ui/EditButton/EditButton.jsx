@@ -1,19 +1,12 @@
-import { FiEdit   } from "react-icons/fi";
+import { FiEdit } from "react-icons/fi";
+import styles from "./EditButton.module.scss";
 
 export const EditButton = ({ onClick }) => {
   return (
     <button
       type="button"
       onClick={onClick}
-      style={{
-        border: "none",
-        background: "transparent",
-        cursor: "pointer",
-        padding: "4px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      className={styles.editButton}
       aria-label="Edit"
     >
       <FiEdit   size={18} color="#777" />

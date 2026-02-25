@@ -1,16 +1,177 @@
-# React + Vite
+# 🎉 Event Planner – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and lightweight event planning application built with **React** and structured using **Feature-Sliced Design (FSD)** architecture.
 
-Currently, two official plugins are available:
+This application allows users to create and manage events, guests, tasks, dishes, and shopping lists in a clean, responsive, and performance-optimized interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
+## 🚀 Demo
 
-## React Compiler
+🔗 **Try the application here:** 
+[https://nutrition-analysis-serenityscript.netlify.app/](https://nutrition-analysis-serenityscript.netlify.app/)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+[![Event Planner Preview](assets/demo.png)](https://nutrition-analysis-serenityscript.netlify.app/)
 
-## Expanding the ESLint configuration
+---
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🗓 Create, edit, and manage events
+- 👥 Guest management with attendance status
+- ✅ Task tracking with completion state
+- 🍽 Dish planning with responsibility assignment
+- 🛒 Shopping list with category and purchase tracking
+- 🔁 Real-time UI updates after CRUD operations
+- 💬 Custom confirmation modal (no external UI libraries)
+- ⚡ Lazy-loaded pages (code splitting)
+- 🎨 Consistent design system using SCSS Modules
+- 📱 Mobile-friendly UI
+
+---
+## 🏗 Architecture
+
+This project follows **Feature-Sliced Design (FSD)** principles:
+
+app/
+entities/
+features/
+pages/
+shared/
+widgets/
+
+---
+## 🧠 Architectural Decisions
+
+- Feature-Sliced Design structure
+- Route-based lazy loading
+- Barrel files to simplify and standardize imports
+- Scoped SCSS Modules
+- Minimal dependency approach
+
+---
+## 🚀 Performance Optimizations
+
+- React `lazy()` + `Suspense` for route-based code splitting
+- Minimal dependency footprint
+- Custom lightweight confirmation modal instead of heavy UI libraries
+- Scoped SCSS Modules to avoid global CSS overhead
+
+---
+## 🧠 Technical Stack
+
+- **React 18**
+- React Router
+- Vite
+- SCSS Modules
+- Feature-Sliced Design
+- REST API integration
+- Custom lightweight UI components
+
+---
+## 🎨 Design Decisions
+
+### Why no UI framework?
+
+Instead of using heavy UI libraries (e.g., MUI, Ant Design), this project relies on:
+
+- Custom SCSS Modules
+- Lightweight reusable components
+- Mobile-first layout approach
+- Minimal bundle size
+
+This keeps the application:
+
+- Fast
+- Lightweight
+- Fully customizable
+
+---
+## 📂 Project Structure
+
+src/
+├── app/
+│ ├── providers/
+│ ├── router/
+│
+├── pages/
+│ ├── EventsListPage/
+│ ├── EventDetailsPage/
+│
+├── features/
+│ ├── EditEvent/
+│ ├── DeleteDish/
+│ ├── DeleteGuest/
+│
+├── entities/
+│ ├── Event/
+│
+├── widgets/
+│ ├── EventLayout/
+│ ├── EventTabs/
+│ ├── TasksPanel/
+│
+├── shared/
+│ ├── ui/
+│ │ ├── Button/
+│ │ ├── Modal/
+│ │ ├── Confirm/
+│ ├── api/
+
+---
+## 🧩 Lazy Loading Example
+
+Pages are dynamically loaded using React lazy:
+
+```javascript
+export const EventDetailsPage = lazy(() =>
+  import("./ui/EventDetailsPage")
+); 
+```
+
+Wrapped with:
+```
+<Suspense fallback={<div>Loading...</div>}>
+  <Routes />
+</Suspense>
+```
+---
+## 🔐 Custom Confirmation System
+
+Instead of using window.confirm, the application includes a lightweight custom confirmation system.
+
+### Benefits:
+
+- Consistent UI
+- Mobile-friendly interaction
+- Lightweight implementation
+- Fully customizable
+
+---
+## 📱 Responsive Design
+
+- Optimized for mobile interaction
+- Clean minimal layout
+- No hover-dependent interactions
+- Large touch-friendly buttons
+
+---
+## 📦 Installation
+git clone <your-repo-url>
+cd event-planner-frontend
+npm install
+npm run dev
+
+---
+## 🛠 Future Improvements
+
+- Toast notification system
+- Drag & drop task reordering
+- User authentication
+- Dark mode support
+- Persistent storage for filters
+
+---
+## 👩‍💻 Author
+
+Yulia Siebrandt
+Frontend Developer
+Hamburg, Germany

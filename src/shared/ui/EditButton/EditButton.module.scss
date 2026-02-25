@@ -1,0 +1,11 @@
+@use "@/app/styles/index" as *;
+
+.editButton {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

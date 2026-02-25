@@ -1,34 +1,18 @@
-// src/shared/ui/Modal/Modal.jsx
+import styles from "./Modal.module.scss";
+
 export const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        backgroundColor: "rgba(0,0,0,0.4)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        zIndex: 9999,
-      }}
-      onClick={onClose}
-    >
+    <div className={styles.modalMainCont} onClick={onClose}>
       <div
-        style={{
-          backgroundColor: "#fff",
-          padding: "16px",
-          borderRadius: "12px",
-          minWidth: "320px",
-          maxWidth: "90vw",
-        }}
+        className={styles.modalCont}
         onClick={(e) => e.stopPropagation()}
       >
         <button
           type="button"
           onClick={onClose}
-          style={{ float: "right", border: "none", background: "transparent" }}
+          className={styles.closeBtn}
         >
           ✕
         </button>

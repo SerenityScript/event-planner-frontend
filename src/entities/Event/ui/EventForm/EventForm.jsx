@@ -13,9 +13,9 @@ export const EventForm = ({
   const [errors, setErrors] = useState({ date: "", time: "" });
 
   useEffect(() => {
-  setForm(mapInitialToForm(initialValues));
-  setErrors({ date: "", time: "" });
-}, [initialValues?.name, initialValues?.date, initialValues?.time, initialValues?.location]);
+    setForm(mapInitialToForm(initialValues));
+    setErrors({ date: "", time: "" });
+  }, [initialValues?.name, initialValues?.date, initialValues?.time, initialValues?.location]);
 
   const handleChange = (field) => (e) => {
     const value = e.target.value;
@@ -53,10 +53,6 @@ export const EventForm = ({
 
   return (
     <div>
-      <header>
-        <h1>Neues Event</h1>
-      </header>
-
       <form onSubmit={handleSubmit}>
         <div className={styles.eventFormField}>
           <label className={styles.eventFormLabel} htmlFor="event-name">
@@ -86,8 +82,9 @@ export const EventForm = ({
             inputMode="numeric"
             aria-invalid={Boolean(errors.date)}
           />
-          {errors.date && <div className="event-form__error">{errors.date}</div>}
+          {errors.date && <div>{errors.date}</div>}
         </div>
+
         <div className={styles.eventFormField}>
           <label className={styles.eventFormLabel} htmlFor="event-time">
             Uhrzeit
@@ -102,26 +99,24 @@ export const EventForm = ({
             inputMode="numeric"
             aria-invalid={Boolean(errors.time)}
           />
-          {errors.time && <div className="event-form__error">{errors.time}</div>}
+          {errors.time && <div>{errors.time}</div>}
         </div>
         
-
         <div className={styles.eventFormField}>
           <label className={styles.eventFormLabel} htmlFor="event-location">
             Standort
           </label>
           
-            <input
-              id="event-location"
-              type="text"
-              className={styles.eventFormInput}
-              placeholder="Restaurant / Park / Adresse"
-              value={form.location}
-              onChange={handleChange("location")}
-            />
-            
-          
+          <input
+            id="event-location"
+            type="text"
+            className={styles.eventFormInput}
+            placeholder="Restaurant / Park / Adresse"
+            value={form.location}
+            onChange={handleChange("location")}
+          />
         </div>
+        
         <div className={styles.eventFormBtnContainer}>
           <button type="submit" className={styles.eventFormBtn} disabled={isSubmitting}>
             {isSubmitting ? "Saving..." : submitLabel}

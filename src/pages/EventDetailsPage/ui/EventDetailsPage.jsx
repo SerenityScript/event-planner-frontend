@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEventDetails } from "../model/useEventDetails";
-import { EventTabs } from "@/widgets/EventTabs/ui/EventTabs";
-import { EventLayout } from "@/widgets/EventLayout/ui/EventLayout";
+import { EventTabs } from "@/widgets/EventTabs";
+import { EventLayout } from "@/widgets/EventLayout";
 import { EditEvent } from "@/features/EditEvent";
-import { TasksPanel } from "@/widgets/TasksPanel/ui/TasksPanel";
-import { GuestsPanel } from "@/widgets/GuestsPanel/ui/GuestsPanel";
-import { DishesPanel } from "@/widgets/DishesPanel/ui/DishesPanel";
-import { ShoppingPanel } from "@/widgets/ShoppingPanel/ui/ShoppingPanel";
+import { TasksPanel } from "@/widgets/TasksPanel";
+import { GuestsPanel } from "@/widgets/GuestsPanel";
+import { DishesPanel } from "@/widgets/DishesPanel";
+import { ShoppingPanel } from "@/widgets//ShoppingPanel";
 import styles from "./EventDetailsPage.module.scss";
 
 const EventDetailsPage = ({ eventId: eventIdProp }) => {

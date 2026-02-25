@@ -3,6 +3,7 @@ import { Modal } from "@/shared/ui";
 import { TaskForm } from "@/entities/Task";
 import { EditButton } from "@/shared/ui";
 import { updateTask } from "@/shared/api/tasks";
+import styles from "./EditTask.module.scss";
 
 export const EditTask = ({ eventId, task, onUpdated }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -38,14 +39,8 @@ export const EditTask = ({ eventId, task, onUpdated }) => {
       <EditButton onClick={handleOpen} />
 
       <Modal isOpen={isOpen} onClose={handleClose}>
-        <div style={{ minWidth: "320px" }}>
-        <h3
-          style={{
-            marginTop: 0,
-            marginBottom: "12px",
-            fontSize: "18px",
-          }}
-        >
+        <div>
+        <h3 className={styles.heading}>
           Aufgabe bearbeiten
         </h3>
 

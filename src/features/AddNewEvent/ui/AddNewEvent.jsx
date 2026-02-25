@@ -37,6 +37,10 @@ export const AddNewEvent = ({ onCreated }) => {
       </button>
 
       <Modal isOpen={isOpen} onClose={handleClose}>
+        <header>
+          <h1>Neues Event</h1>
+        </header>
+        
         <EventForm
           initialValues={{ name: "", date: "", time: "", location: "" }}
           submitLabel="Event erstellen"

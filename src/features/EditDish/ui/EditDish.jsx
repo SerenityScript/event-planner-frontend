@@ -3,6 +3,7 @@ import { Modal } from "@/shared/ui";
 import { DishForm } from "@/entities/Dish";
 import { EditButton } from "@/shared/ui";
 import { updateDish } from "@/shared/api/dishes";
+import styles from "./EditDish.module.scss";
 
 export const EditDish = ({ eventId, dish, responsibleOptions, onUpdated }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -34,8 +35,8 @@ export const EditDish = ({ eventId, dish, responsibleOptions, onUpdated }) => {
       <EditButton onClick={handleOpen} />
 
       <Modal isOpen={isOpen} onClose={handleClose}>
-        <div style={{ minWidth: "320px" }}>
-          <h3 style={{ marginTop: 0, marginBottom: "12px", fontSize: "18px" }}>
+        <div>
+          <h3 className={styles.heading}>
             Gericht bearbeiten
           </h3>
 
