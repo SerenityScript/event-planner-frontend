@@ -31,12 +31,12 @@ This application allows users to create and manage events, guests, tasks, dishes
 
 This project follows **Feature-Sliced Design (FSD)** principles:
 
-app/
-entities/
-features/
-pages/
-shared/
-widgets/
+- **app/** – application setup (routing, providers)
+- **pages/** – route-level pages
+- **features/** – business features
+- **entities/** – core domain models
+- **widgets/** – composite UI blocks
+- **shared/** – reusable UI & utilities
 
 ---
 ## 🧠 Architectural Decisions
@@ -86,7 +86,7 @@ This keeps the application:
 
 ---
 ## 📂 Project Structure
-
+```
 src/
 ├── app/
 │ ├── providers/
@@ -115,7 +115,7 @@ src/
 │ │ ├── Modal/
 │ │ ├── Confirm/
 │ ├── api/
-
+```
 ---
 ## 🧩 Lazy Loading Example
 
